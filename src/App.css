@@ -1,38 +1,562 @@
-.App {
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --font-family-1: 'Jost', sans-serif;
+  --font-color-p: #f7f7f7;
+  --font-color-p-dark: rgb(49, 49, 49);
+  --color-primary-0: #FC926E;	/* Main Primary color */
+  --color-primary-1: #FFCFBE;
+  --color-primary-2: #FFAF94;
+  --color-primary-3: #DD6C45;
+  --color-primary-4: #BB4922;
+
+  --color-secondary-1-0: #FCBD6E;	/* Main Secondary color (1) */
+  --color-secondary-1-1: #FFE2BE;
+  --color-secondary-1-2: #FFD094;
+  --color-secondary-1-3: #DD9A45;
+  --color-secondary-1-4: #BB7822;
+
+  --color-secondary-2-0: #DE618B; 	/* Main Secondary color (2) */
+  --color-secondary-2-1: #F5B6CB; 
+  --color-secondary-2-2: #EB88A9; 
+  --color-secondary-2-3: #C33D6A;
+  --color-secondary-2-4: #A51E4B; 
+
+  --color-secondary-3-0: #56A0B9; 	/* Main Secondary color (1) */
+  --color-secondary-3-1: #B7DFED; 
+  --color-secondary-3-2: #82C0D5; 
+  --color-secondary-3-3: #36839C; 
+  --color-secondary-3-4: #1D728E; 
+}
+
+html {
+  font-family: var(--font-family-1);
+  /* background: var(--color-primary-1); */
+}
+
+/* GLOBAL STYLES */
+
+.fs-xl {
+  font-size: x-large;
+}
+.text-center {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.text-justify {
+  text-align: justify;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.pad-5 {
+  padding: 5px;
+}
+
+.pad-10 {
+  padding: 10px;
+}
+
+.z-bot {
+  position: relative;
+  z-index: -1;
+}
+
+/* NAV STYLES */
+.mobile-nav {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  width: 100%;
+  z-index: 1000;
+}
+
+#menuToggle {
+
+  z-index: 10000;
+}
+
+#menuToggle a {
+  position: relative;
+  z-index: 10000;
+  text-decoration: none;
+  color: #f7f7f7;
+
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover {
+/* color: var() */
+text-decoration: underline;
+}
+
+#menuToggle input {
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+
+  cursor: pointer;
+
+  opacity: 0; /* hide this */
+  z-index: 20000; /* and place it over the hamburger */
+
+  -webkit-touch-callout: none;
+}
+
+#menuToggle span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+
+  background: var(--color-secondary-2-4);
+  border-radius: 3px;
+
+  z-index: 10000;
+
+  transform-origin: 4px 0px;
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+#menuToggle input:checked ~ span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #f7f7f7;
+}
+
+#menuToggle input:checked ~ span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu {
+  position: absolute;
+  width: 110%;
+  margin: -100px 0 0 -25px;
+  padding: 50px;
+  padding-top: 125px;
+
+  background: var(--color-secondary-2-4);
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+
+  transform-origin: 0% 0%;
+  transform: translate(0, -100%);
+
+  z-index: 1000;
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
   }
+
+#menu li {
+    position: relative;
+    z-index: 10000;
+  text-align: center;
+  font-size: 22px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  }
+
+/*
+* And let's slide it in from the left
+*/
+#menuToggle input:checked ~ ul {
+  transform: none;
+  }
+
+/* HEADER STYLE */
+.header-link {
+  display: table;
+  height: 15vh;
+  /* margin: 5px auto 5px auto; */
+  width: 100%;
+  /* font-size: 2.7em; */
+  font-weight: bold;
+  /* background-image: url('./downstream_background.jpg'); */
+  background-position: center;
+  position: relative;
+  border-bottom: 1px solid #A51E4B;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-text {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* HOME STYLE */
+
+.home-container {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#home-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+
+.form-container {
+  border: 1px solid #A51E4B;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 40px;
+}
+
+.location-input {
+  width: 80%;
+}
+
+.location-button {
+  margin-top: 10px;
+  width: 100px;
+}
+
+/* ACTIVITY STYLES */
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 35%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.main-container {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #A51E4B;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.preview-image {
+  position: relative;
+  z-index: -1;
+  width: 80%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.map-container {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #A51E4B;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.add-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  
+}
+
+.step {
+  width: 26%;
+  border-top: 1px solid #A51E4B;
+  border-right: 1px solid #A51E4B;
+  background-color: rgb(31, 31, 31);
+  position: relative;
+}
+
+.step img {
+  width: 100%;
+  height: 100%;
+  opacity: 0.7
+}
+
+.step-icon {
+  position: absolute;
+  top: calc(50% - 16px);
+  left: calc(50% - 16px);
+  font-size: 32px;
+}
+
+.prev-step {
+  width: 11%;
+  border-top: 1px solid #A51E4B;
+}
+
+.next-step {
+  width: 11%;
+  border-top: 1px solid #A51E4B;
+}
+
+/* CATEGORY STYLES */
+
+.category-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.category {
+  border: 1px solid #A51E4B;
+  border-radius: 5px;
+  padding: 5px;
+  width: 45%;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  transition: all 0.4s ease 0s;
+  cursor: pointer;
+}
+
+.category:hover {
+  background-color: #A51E4B;
   color: white;
+  transition: all 0.4s ease 0s;
 }
 
-.App-link {
-  color: #61dafb;
+/* PROFILE STYLES */
+
+.profile-date-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  border: 1px solid #A51E4B;
+  height: 100px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.profile-step {
+  width: 26%;
+  height: 100%;
+  border-left: 1px solid #A51E4B;
+  border-right: 1px solid #A51E4B;
+  background-color: rgb(31, 31, 31);
+  z-index: -2;
+}
+
+.profile-step img {
+  width: 100%;
+  height: 100%;
+  opacity: 0.7
+}
+
+.profile-item-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+.profile-date-title {
+  width: 100%;
+  text-align: center;
+}
+
+.profile-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p-btn {
+  cursor: pointer;
+}
+
+/* SUMMARY STYLES */
+
+.summary-container {
+  position: relative;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border: 1px solid #A51E4B;
+  border-radius: 5px;
+  padding: 20px;
+  z-index: 1;
+}
+
+
+
+.edit-container {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: large;
+}
+
+/* LOGIN/SIGNUP STYLES */
+.form-box {
+  background-color: var(--color-secondary-3-1);
+  margin-top: 20px;
+  width: 400px;
+  min-height: fit-content;
+  padding-bottom: 20px;
+  min-width: fit-content;
+  position: relative;
+}
+
+.form-box-ls {
+  margin-top: 50px;
+  width: 400px;
+  min-height: fit-content;
+  padding-bottom: 20px;
+  min-width: fit-content;
+}
+
+.form-box-ls h1 {
+  text-align: center;
+  color: var(--font-color-p-dark);
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.form-box h1 {
+  text-align: center;
+  color: var(--font-color-p-dark);
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.main-form h4 {
+  margin-left: 35px;
+  color: var(--font-color-p-dark);
+}
+
+.main-form h5 {
+  font-size: 0.95em;
+}
+
+.text-input {
+  display: block;
+  width: 320px;
+  height: 40px;
+  font-size: 18px;
+  padding-left: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  opacity: 0.8;
+  border-radius: 10px;
+  border: none;
+  border-bottom: 2px solid white;
+  background-color: var(--font-color-p);
+  color: var(--font-color-p-dark);
+  outline: none;
+}
+
+.main-form textarea {
+  display: block;
+  /* width: 320px; */
+  width: 90%;
+  height: 140px;
+  font-size: 18px;
+  /* padding: 15px; */
+  margin: 10px 20px 10px 20px;
+  resize: none;
+}
+
+.main-form fieldset {
+  padding: 0;
+  border: none;
+}
+
+.main-form button {
+  width: 320px;
+  height: 55px;
+  padding: 15px;
+  margin-top: 25px;
+  border: 2px solid #F7F9Fb;
+  background: rgb(77, 117, 192);
+  font: inherit;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  color: var(--font-color-p);
+}
+
+.main-form button:hover, .main-form button:active, .main-form button:focus {
+  border: 2px solid blue;
+  background: blue;
+}
+
+.login-box {
+  width: 400px;
+  text-align: center;
+}
+
+.login-box p {
+  color: var(--font-color-p-dark);
+}
+
+.login-box a {
+  color: var(--font-color-p-dark);
 }
