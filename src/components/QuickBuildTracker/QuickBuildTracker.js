@@ -19,9 +19,13 @@ class QuickBuildTracker extends React.Component {
                     <img src="https://via.placeholder.com/400" />
                     <i className="fas fa-question step-icon"></i>
                 </div>
+                <div className="step">
+                    <img src="https://via.placeholder.com/400" />
+                    <i className="fas fa-question step-icon"></i>
+                </div>
                 <div className="next-step text-center">
                     {">>"}
-            </div>
+                </div>
             </div>
         )
     }
