@@ -6,6 +6,7 @@ import QuickBuildTracker from '../../components/QuickBuildTracker/QuickBuildTrac
 import CategorySelect from '../../components/CategorySelect/CategorySelect';
 import ExtApiService from '../../services/external-api-service';
 import DRContext from '../../context/DRContext';
+import RestaurantItem from '../../components/RestaurantItem/RestaurantItem';
 
 class MealPage extends React.Component {
     static contextType = DRContext;
@@ -16,6 +17,7 @@ class MealPage extends React.Component {
             loading: true,
             meal: null,
             category: null,
+            restaurants: null,
         }
     }
 
@@ -47,6 +49,11 @@ class MealPage extends React.Component {
                     meal
                 })
             })
+
+        // ExtApiService.getPlacesByLocation(this.context.latLong, 'restaurant')
+        //     .then(restaurants => {
+        //         console.log(restaurants);
+        //     })
     }
 
     render() {
@@ -91,6 +98,8 @@ class MealPage extends React.Component {
 
                     <QuickBuildTracker />
                 </section>
+
+                <RestaurantItem />
             </main>
         )
     }

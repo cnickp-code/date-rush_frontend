@@ -7,14 +7,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      latLong: null,
       location: null,
       dateMeal: null,
       dateDrink: null,
     }
   }
 
-  handleSetLocation = (location) => {
+  handleSetLocation = (latLong, location) => {
     this.setState({
+      latLong,
       location
     })
   }
@@ -33,6 +35,7 @@ class App extends React.Component {
 
   render() {
     let contextValue = {
+      latLong: this.state.latLong,
       location: this.state.location,
       dateMeal: this.state.dateMeal,
       dateDrink: this.state.dateDrink,
@@ -44,7 +47,8 @@ class App extends React.Component {
 
     console.log(this.state.dateMeal);
     console.log(this.state.dateDrink);
-    console.log(this.state.location);
+    console.log('app location ', this.state.location);
+    console.log('app latlong ', this.state.latLong)
 
     return (
       <div className="App">

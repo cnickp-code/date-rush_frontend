@@ -12,8 +12,8 @@ class CategorySelect extends React.Component {
     }
 
     render() {
-        let categoryDisplay = this.props.categories.map(cat => {
-            return <Category category={cat} onCategorySelect={this.props.onCategorySelect}/>
+        let categoryDisplay = this.props.categories.map((cat, i) => {
+            return <Category key={i} category={cat} onCategorySelect={this.props.onCategorySelect}/>
         })
 
         return (
