@@ -3,9 +3,13 @@ import Header from '../../components/Header/Header';
 import Nav from '../../components/Nav/Nav';
 import ActivityItem from '../../components/ActivityItem/ActivityItem';
 import QuickBuildTracker from '../../components/QuickBuildTracker/QuickBuildTracker';
+import DRContext from '../../context/DRContext';
 
 class ActivityPage extends React.Component {
+    static contextType = DRContext;
+    
     render() {
+        console.log(this.context.places);
         return (
             <main>
                 <Header />

@@ -1,12 +1,17 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
 import Nav from '../../components/Nav/Nav';
-import LocationForm from '../../components/LocationForm/LocationForm'
+import LocationForm from '../../components/LocationForm/LocationForm';
+import LoadingOverlay from '../../components/LoadingOverlay/LoadingOverlay';
+import DRContext from '../../context/DRContext';
 
 class HomePage extends React.Component {
+    static contextType = DRContext;
+
     render() {
         return (
             <main>
+                {this.context.loading && <LoadingOverlay />}
                 <Header />
                 <Nav />
                 <section>

@@ -47,7 +47,7 @@ const google = window.google = window.google ? window.google : {};
 const LocationForm = () => {
 
     const [forward, setForward] = useState(false);
-    const { handleSetLocation, handleSetPlaces } = useContext(DRContext);
+    const { handleSetLocation, handleSetPlaces, handleSetLoader } = useContext(DRContext);
     const [address, setAddress] = useState(null);
     const [latLng, setLatLng] = useState({});
     const [places, setPlaces] = useState([]);
@@ -91,6 +91,8 @@ const LocationForm = () => {
         };
         let placeStore = [];
         let placeObj = {};
+
+        handleSetLoader(true);
     
         service.nearbySearch(request, function(results, status, pagetoken) {
             console.log(results.length);
@@ -118,12 +120,11 @@ const LocationForm = () => {
                 placeStore.push(placeObj);
             }
             if(pagetoken.hasNextPage) {
-                setPlaces(placeStore);
-                handleSetPlaces(places);
+                handleSetPlaces(placeStore);
                 pagetoken.nextPage();
             } else {
-                setPlaces(placeStore);
-                handleSetPlaces(places);
+                handleSetPlaces(placeStore);
+                handleSetLoader(false);
                 setForward(true);
             }
 

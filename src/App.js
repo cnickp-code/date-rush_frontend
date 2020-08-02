@@ -12,6 +12,7 @@ class App extends React.Component {
       dateMeal: null,
       dateDrink: null,
       places: [],
+      loading: false,
     }
   }
 
@@ -40,6 +41,12 @@ class App extends React.Component {
     })
   }
 
+  handleSetLoader = (loadBool) => {
+    this.setState({
+      loading: loadBool
+    })
+  }
+
   render() {
     let contextValue = {
       latLong: this.state.latLong,
@@ -47,17 +54,20 @@ class App extends React.Component {
       dateMeal: this.state.dateMeal,
       dateDrink: this.state.dateDrink,
       places: this.state.places,
+      loading: this.state.loading,
 
       handleSetLocation: this.handleSetLocation,
       handleSetDateMeal: this.handleSetDateMeal,
       handleSetDateDrink: this.handleSetDateDrink,
       handleSetPlaces: this.handleSetPlaces,
+      handleSetLoader: this.handleSetLoader
     }
 
     console.log(this.state.dateMeal);
     console.log(this.state.dateDrink);
     console.log('app location ', this.state.location);
     console.log('app latlong ', this.state.latLong)
+    console.log(this.state.places);
 
     return (
       <div className="App">
