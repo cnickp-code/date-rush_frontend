@@ -11,6 +11,7 @@ import {
     useLoadScript,
     Marker,
     InfoWindow,
+    DistanceMatrixService,
 } from '@react-google-maps/api';
 import PlacesAutocomplete, {
     getGeoCode,
@@ -46,59 +47,90 @@ const google = window.google = window.google ? window.google : {};
 const LocationForm = () => {
 
     const [forward, setForward] = useState(false);
-    const { handleSetLocation } = useContext(DRContext);
+    const { handleSetLocation, handleSetPlaces } = useContext(DRContext);
     const [address, setAddress] = useState(null);
     const [latLng, setLatLng] = useState({});
+    const [places, setPlaces] = useState([]);
+
+    useEffect(() => {
+        setForward(false);
+    }, [])
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: config.GOOGLE_API_KEY,
         libraries
     })
 
-
-
-
-
     const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
         requestOptions: {
-            location: { lat: () => 43.653225, lng: () => -79.383186 },
+            location: { lat: () => latLng.lat, lng: () => latLng.lng },
             radius: 200 * 1000,
         },
     });
 
-
-
-    useEffect(() => {
-        setForward(false);
-        initMap();
-    }, [])
-
     const initMap = () => {
         let map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 25.276987, lng: 55.296249 },
+            center: { lat: latLng.lat, lng: latLng.lng },
             zoom: 15
         });
 
         let service = new google.maps.places.PlacesService(map);
         let request = {
-            location: new google.maps.LatLng(43.653225, -79.383186),
-            radius: 500,
-            type: ['restaurant']
+            location: new google.maps.LatLng(latLng.lat, latLng.lng),
+            radius: 30000,
+            type: ['tourist_attraction'],
+            openNow: true,
+            // [
+            //     'amusement_park', 'campground', 'aquarium', 
+            //     'art_gallery', 'bar', 'bowling_alley', 
+            //     'campground', 'casino', 'movie_theater',
+            //     'museum', 'night_club', 'park', 
+            //     'spa', 'tourist_attraction', 'zoo'
+            // ],
+            // rankBy: google.maps.RankBy.DISTANCE,
         };
+        let placeStore = [];
+        let placeObj = {};
     
         service.nearbySearch(request, function(results, status, pagetoken) {
             console.log(results.length);
             for(let i = 0; i < results.length; i++) {
-                console.log(results[i].name, results[i].types)
+                // console.log(results[i].name, results[i].types)
+                // console.log(results[i]);
+                let latNum = results[i].geometry.location.lat();
+                let lngNum = results[i].geometry.location.lng();
+                let locationObj = { lat: latNum, lng: lngNum };
+                let placeOpen = true;
+                let placeRating = results[i].rating;
+                let photoUrl = '';
+                if(results[i].photos && results[i].photos.length > 0) {
+                    photoUrl = results[i].photos[0].getUrl({ maxHeight: 250 });
+                }
+
+                placeObj = {
+                    name: results[i].name,
+                    photoUrl,
+                    types: results[i].types,
+                    location: locationObj,
+                    isOpen: placeOpen,
+                    rating: placeRating
+                }
+                placeStore.push(placeObj);
             }
             if(pagetoken.hasNextPage) {
+                setPlaces(placeStore);
+                handleSetPlaces(places);
                 pagetoken.nextPage();
+            } else {
+                setPlaces(placeStore);
+                handleSetPlaces(places);
+                setForward(true);
             }
+
         })
+        console.log('ran')
+
     }
-
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -107,7 +139,8 @@ const LocationForm = () => {
         console.log(latLng);
         console.log(address);
         handleSetLocation(latLng, address);
-        // setForward(true);
+        initMap();
+        
 
 
         // ExtApiService.getLocation(location)
