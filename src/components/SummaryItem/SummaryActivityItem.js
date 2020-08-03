@@ -37,11 +37,8 @@ const SummaryActivityItem = () => {
             zoom: 15
         });
         let service = new google.maps.places.PlacesService(map);
-        // let request = {
-        //     placeId: dateActivity
-        // }
         let request = {
-            placeId: 'ChIJJVKKEbXKwoARY782FgZ49Y8'
+            placeId: dateActivity
         }
 
         let placeObj = {};

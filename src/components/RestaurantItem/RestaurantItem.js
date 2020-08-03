@@ -9,11 +9,19 @@ class RestaurantItem extends React.Component {
     }
 
     render() {
-        let restaurantMain = this.props.restaurant
+        let restaurantMain = this.props.restaurant;
         let featuredImg = restaurantMain.featured_image;
+        let avgCost = <p className="text-center">Avg Cost for Two: {'$'}{restaurantMain.average_cost_for_two}</p>
+        let ratingEl = <p className="text-center"> Rating: Not Available</p>
 
         if (restaurantMain.featured_image === '' || restaurantMain.featured_image === null) {
             featuredImg = "https://www.clipartkey.com/mpngs/m/77-776665_lunch-clipart-lunch-date-couple-date-night-cartoon.png"
+        }
+        if(restaurantMain.average_cost_for_two > 0) {
+            avgCost = <p className="text-center">Avg Cost for Two: {'$'}{restaurantMain.average_cost_for_two}</p>
+        }
+        if(restaurantMain.user_rating.aggregate_rating === 0) {
+            ratingEl = <p className="text-center"> Rating: {restaurantMain.user_rating.aggregate_rating} out of 5</p>
         }
 
         return (
@@ -33,7 +41,7 @@ class RestaurantItem extends React.Component {
                 <div className="divider center mb-20 mt-20"></div>
 
                 <p className="text-center">Price Range: {'$'.repeat(restaurantMain.price_range)}</p>
-                <p className="text-center">Avg Cost for Two: {'$'}{restaurantMain.average_cost_for_two}</p>
+                {avgCost}
 
                 <div className="divider center mb-20 mt-20"></div>
 

@@ -133,7 +133,7 @@ class MoviesPage extends React.Component {
                 </section>
 
                 <section>
-                    {this.state.showBool && <MovieItem show={this.state.mainShow} />}
+                    {this.state.showBool && <MovieItem movieBool={this.state.movie} show={this.state.mainShow} />}
 
                     {this.state.showBool && <div className="add-button-container mt-20 mb-20">
                         <button 

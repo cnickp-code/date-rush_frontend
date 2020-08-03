@@ -4,9 +4,9 @@ export default {
     DRINK_API_ENDPOINT: 'https://www.thecocktaildb.com/api/json/v1',
     PLACES_API_ENDPOINT: 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json',
     LOCATION_API_ENDPOINT: 'http://api.positionstack.com/v1/forward',
-    RESTAURANTS_API_ENDPOINT: 'https://developers.zomato.com/api/v2.1/search?',
-    MOVIES_API_ENDPOINT: 'https://api.themoviedb.org/3/movie/popular?',
-    TV_API_ENDPOINT: 'https://api.themoviedb.org/3/tv/popular?',
+    RESTAURANTS_API_ENDPOINT: 'https://developers.zomato.com/api/v2.1',
+    MOVIES_API_ENDPOINT: 'https://api.themoviedb.org/3/movie',
+    TV_API_ENDPOINT: 'https://api.themoviedb.org/3/tv',
 
     MEAL_API_KEY: '1',
     DRINK_API_KEY: '1',

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Routes from './Routes';
 import DRContext from './context/DRContext'
+import ExtApiService from './services/external-api-service';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class App extends React.Component {
       dateShow: null,
       places: [],
       loading: false,
+      movieGenres: [],
+      tvGenres: [],
     }
   }
 
@@ -61,6 +64,22 @@ class App extends React.Component {
     })
   }
 
+  componentDidMount() {
+    ExtApiService.getMovieGenres()
+      .then(results => {
+        this.setState({
+          movieGenres: results.genres
+        })
+      })
+
+    ExtApiService.getTvGenres()
+      .then(results => {
+        this.setState({
+          tvGenres: results.genres
+        })
+      })
+  }
+
   render() {
     let contextValue = {
       latLong: this.state.latLong,
@@ -71,6 +90,8 @@ class App extends React.Component {
       dateShow: this.state.dateShow,
       places: this.state.places,
       loading: this.state.loading,
+      movieGenres: this.state.movieGenres,
+      tvGenres: this.state.tvGenres,
 
       handleSetLocation: this.handleSetLocation,
       handleSetDateMeal: this.handleSetDateMeal,
@@ -85,11 +106,14 @@ class App extends React.Component {
     console.log('Meal: ', this.state.dateMeal);
     console.log('Drink: ', this.state.dateDrink);
     console.log('Activity: ', this.state.dateActivity);
-    console.log('Show: ',this.state.dateShow);
+    console.log('Show: ', this.state.dateShow);
     console.log('--------------------')
     console.log('app location ', this.state.location);
     console.log('app latlong ', this.state.latLong)
     console.log(this.state.places);
+    console.log('genres:')
+    console.log(this.state.tvGenres);
+    console.log(this.state.movieGenres);
 
 
     return (

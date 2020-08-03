@@ -25,19 +25,27 @@ class DrinksPage extends React.Component {
 
     handleSetCategory = (category) => {
         if(category === 'Alcoholic') {
-            let alcDrinks = this.state.alcDrinks;
-            let randIndex = Math.floor(Math.random() * Math.floor(alcDrinks.length-1));
-            let drink = alcDrinks[randIndex];
+            // let alcDrinks = this.state.alcDrinks;
+            // let randIndex = Math.floor(Math.random() * Math.floor(alcDrinks.length-1));
+            // let drink = alcDrinks[randIndex];
 
-            ExtApiService.getDrinkById(drink.idDrink)
-                .then(drinks => {
-                    let drink = drinks.drinks[0];
-                    console.log(drinks)
-                    this.setState({
-                        drink,
-                        category
-                    })
+            // ExtApiService.getDrinkById(drink.idDrink)
+            //     .then(drinks => {
+            //         let drink = drinks.drinks[0];
+            //         console.log(drinks)
+            //         this.setState({
+            //             drink,
+            //             category
+            //         })
+            //     })
+
+            ExtApiService.getAlcDrinks()
+            .then(drinks => {
+                this.setState({
+                    drink: drinks.drinks[0],
+                    category
                 })
+            })
         } else {
             let nonAlcDrinks = this.state.nonAlcDrinks;
             let randIndex = Math.floor(Math.random() * Math.floor(nonAlcDrinks.length-1));
@@ -57,32 +65,48 @@ class DrinksPage extends React.Component {
     handleRandomDrink = () => {
         console.log('handleRandomDrink reached');
 
-        if(this.state.category === 'Alcoholic') {
-            let alcDrinks = this.state.alcDrinks;
-            let randIndex = Math.floor(Math.random() * Math.floor(alcDrinks.length-1));
-            let drink = alcDrinks[randIndex];
+        ExtApiService.getAlcDrinks()
+        .then(drinks => {
+            console.log(drinks);
+            this.setState({
+                drink: drinks.drinks[0]
+            })
+        })
 
-            ExtApiService.getDrinkById(drink.idDrink)
-                .then(drinks => {
-                    let drink = drinks.drinks[0];
-                    console.log(drinks)
-                    this.setState({
-                        drink
-                    })
-                })
-        } else {
-            let nonAlcDrinks = this.state.nonAlcDrinks;
-            let randIndex = Math.floor(Math.random() * Math.floor(nonAlcDrinks.length-1));
-            let drink = nonAlcDrinks[randIndex];
+        // if(this.state.category === 'Alcoholic') {
+            // let alcDrinks = this.state.alcDrinks;
+            // let randIndex = Math.floor(Math.random() * Math.floor(alcDrinks.length-1));
+            // let drink = alcDrinks[randIndex];
+            // console.log(randIndex);
 
-            ExtApiService.getDrinkById(drink.idDrink)
-                .then(drinks => {
-                    let drink = drinks.drinks[0]
-                    this.setState({
-                        drink
-                    })
-                })
-        }
+            // ExtApiService.getDrinkById(drink.idDrink)
+            //     .then(drinks => {
+            //         let drink = drinks.drinks[0];
+            //         console.log(drinks)
+            //         this.setState({
+            //             drink
+            //         })
+            //     })
+        //     ExtApiService.getAlcDrinks()
+        //     .then(drinks => {
+        //         this.setState({
+        //             drink: drinks.drinks[0]
+        //         })
+        //     })
+        // } else {
+        //     let nonAlcDrinks = this.state.nonAlcDrinks;
+        //     let randIndex = Math.floor(Math.random() * Math.floor(nonAlcDrinks.length-1));
+        //     let drink = nonAlcDrinks[randIndex];
+        //     console.log(randIndex);
+
+        //     ExtApiService.getDrinkById(drink.idDrink)
+        //         .then(drinks => {
+        //             let drink = drinks.drinks[0]
+        //             this.setState({
+        //                 drink
+        //             })
+        //         })
+        // }
     }
 
     handleAddDrink = () => {
@@ -95,23 +119,27 @@ class DrinksPage extends React.Component {
     componentDidMount() {
         ExtApiService.getAlcDrinks()
             .then(drinks => {
+                console.log(drinks);
                 this.setState({
                     loading: false,
-                    alcDrinks: drinks.drinks
+                    drink: drinks.drinks[0]
                 })
             })
         
-        ExtApiService.getNonAlcDrinks()
-            .then(drinks => {
-                this.setState({
-                    loading: false,
-                    nonAlcDrinks: drinks.drinks
-                })
-            })
+        // ExtApiService.getNonAlcDrinks()
+        //     .then(drinks => {
+        //         this.setState({
+        //             loading: false,
+        //             nonAlcDrinks: drinks.drinks
+        //         })
+        //     })
     }
 
     render() {
-        let categoryArray = ['Alcoholic', 'Non-Alcoholic'];
+        // let categoryArray = ['Alcoholic', 'Non-Alcoholic'];
+        console.log(this.state.alcDrinks);
+        console.log(this.state.nonAlcDrinks);
+        console.log(this.state.drink);
 
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
             return <Redirect to='/'></Redirect>
@@ -127,9 +155,9 @@ class DrinksPage extends React.Component {
                 <section>
                     <h2 className="text-center mb-10 mt-10">STEP 3 / What to Drink?</h2>
 
-                    <CategorySelect onCategorySelect={this.handleSetCategory} categories={categoryArray}/>
+                    {/* <CategorySelect onCategorySelect={this.handleSetCategory} categories={categoryArray}/> */}
 
-                    {this.state.category && <div className="button-container">
+                    {!this.state.loading && <div className="button-container">
                         {/* <button className="prev-next-button pad-5"> {"<<"} Prev</button>
                         <button className="prev-next-button pad-5">Next {">>"}</button> */}
                         <button
@@ -140,9 +168,9 @@ class DrinksPage extends React.Component {
                 </section>
 
                 <section>
-                    {this.state.category && <DrinkItem drink={this.state.drink} />}
+                    {!this.state.loading && <DrinkItem drink={this.state.drink} />}
 
-                    {this.state.category && <div className="add-button-container mt-20 mb-20">
+                    {!this.state.loading && <div className="add-button-container mt-20 mb-20">
                         <button 
                         className="add-button pad-5 center item-btn"
                         onClick={this.handleAddDrink}

@@ -30,6 +30,9 @@ class DrinkItem extends React.Component {
                 <p className="text-center">
                     <img src={this.props.drink.strDrinkThumb} className="preview-image mb-10" />
                 </p>
+                <h4 className="mb-10 mt-10 text-center">{this.props.drink.strAlcoholic}</h4>
+                
+                <div className="divider center mb-20 mt-20"></div>
 
                 <h4 className="mb-10">Ingredients:</h4>
                 {ingredientArray}

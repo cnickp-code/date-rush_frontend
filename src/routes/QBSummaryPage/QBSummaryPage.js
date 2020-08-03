@@ -1,4 +1,7 @@
 import React from 'react';
+import { useContext } from 'react';
+import DRContext from '../../context/DRContext';
+import { Redirect } from 'react-router-dom';
 import SummaryActivityItem from '../../components/SummaryItem/SummaryActivityItem';
 import SummaryDrinkItem from '../../components/SummaryItem/SummaryDrinkItem';
 import SummaryMealItem from '../../components/SummaryItem/SummaryMealItem';
@@ -8,6 +11,12 @@ import Nav from '../../components/Nav/Nav';
 import QuickBuildTracker from '../../components/QuickBuildTracker/QuickBuildTracker';
 
 const QBSummaryPage = () => {
+
+    const { places, location, latLong } = useContext(DRContext);
+
+    if (places.length < 1 || location === null || latLong === null) {
+        return <Redirect to='/'></Redirect>
+    }
 
     return (
         <main >
