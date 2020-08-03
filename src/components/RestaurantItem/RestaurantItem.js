@@ -9,7 +9,6 @@ class RestaurantItem extends React.Component {
     }
 
     render() {
-        console.log(this.props.restaurant);
         let restaurantMain = this.props.restaurant
         let featuredImg = restaurantMain.featured_image;
 

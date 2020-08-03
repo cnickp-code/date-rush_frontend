@@ -643,3 +643,8 @@ text-decoration: underline;
 .login-box a {
   color: var(--font-color-p-dark);
 }
+
+/* MOVIE STYLES */
+.popularity-container {
+  width: 60%;
+}

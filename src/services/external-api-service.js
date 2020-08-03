@@ -53,7 +53,23 @@ const ExtApiService = {
                     ? res.json().then(e => Promise.reject(e))
                     : res.json()
             )
-    }
+    },
+    getMoviesByPopularity(popularity) {
+        return fetch(`${config.MOVIES_API_ENDPOINT}api_key=${config.TMDB_API_KEY}&language=en-US&page=${popularity}`)
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
+    getTvShowsByPopularity(popularity) {
+        return fetch(`${config.TV_API_ENDPOINT}api_key=${config.TMDB_API_KEY}&language=en-US&page=${popularity}`)
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
 }
 
 export default ExtApiService;

@@ -14,6 +14,7 @@ class DrinksPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            forward: false,
             loading: true,
             alcDrinks: [],
             nonAlcDrinks: [],
@@ -86,6 +87,9 @@ class DrinksPage extends React.Component {
 
     handleAddDrink = () => {
         this.context.handleSetDateDrink(this.state.drink.idDrink);
+        this.setState({
+            forward: true
+        })
     }
 
     componentDidMount() {
@@ -112,6 +116,9 @@ class DrinksPage extends React.Component {
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
             return <Redirect to='/'></Redirect>
         }
+        if(this.state.forward) {
+            return <Redirect to='/qb-movies'></Redirect>
+        }
 
         return (
             <main>
@@ -126,9 +133,9 @@ class DrinksPage extends React.Component {
                         {/* <button className="prev-next-button pad-5"> {"<<"} Prev</button>
                         <button className="prev-next-button pad-5">Next {">>"}</button> */}
                         <button
-                        className="prev-next-button pad-5 item-btn"
-                        onClick={this.handleRandomDrink}
-                        >Next Drink</button>
+                            className="prev-next-button pad-5 item-btn"
+                            onClick={this.handleRandomDrink}
+                        >Next</button>
                     </div>}
                 </section>
 

@@ -12,6 +12,7 @@ class ActivityPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            forward: false,
             loading: true,
             activity: null,
         }
@@ -30,6 +31,9 @@ class ActivityPage extends React.Component {
 
     handleAddActivity = () => {
         this.context.handleSetDateActivity(this.state.activity.id);
+        this.setState({
+            forward: true
+        })
     }
 
     componentDidMount() {
@@ -46,6 +50,9 @@ class ActivityPage extends React.Component {
     render() {
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
             return <Redirect to='/'></Redirect>
+        }
+        if(this.state.forward) {
+            return <Redirect to='/qb-meals'></Redirect>
         }
         console.log(this.context.places);
         console.log(this.state.activity);

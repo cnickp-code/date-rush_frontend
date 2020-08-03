@@ -15,6 +15,7 @@ class MealPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            forward: false,
             loading: true,
             meal: null,
             in: false,
@@ -68,17 +69,21 @@ class MealPage extends React.Component {
         let mealObj;
         if(this.state.in) {
             mealObj = {
+                id: this.state.meal.meals[0].idMeal,
                 type: 'In',
-                id: this.state.meal.meals[0].idMeal
             }
             this.context.handleSetDateMeal(mealObj); 
         } else {
             mealObj = {
+                id: this.state.restaurant.id,
                 type: 'Out',
-                id: this.state.restaurant.id
             }
             this.context.handleSetDateMeal(mealObj);
         }
+
+        this.setState({
+            forward: true
+        })
          
     }
 
@@ -122,6 +127,10 @@ class MealPage extends React.Component {
 
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
             return <Redirect to='/'></Redirect>
+        }
+
+        if(this.state.forward) {
+            return <Redirect to='/qb-drinks'></Redirect>
         }
 
         console.log(this.state.meal);
