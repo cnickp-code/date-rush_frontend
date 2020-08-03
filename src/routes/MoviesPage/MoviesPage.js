@@ -6,8 +6,7 @@ import QuickBuildTracker from '../../components/QuickBuildTracker/QuickBuildTrac
 import CategorySelect from '../../components/CategorySelect/CategorySelect';
 import DRContext from '../../context/DRContext';
 import ExtApiService from '../../services/external-api-service';
-import { Slider } from 'antd';
-import 'antd/dist/antd.css';
+import { Redirect } from 'react-router-dom';
 
 class MoviesPage extends React.Component {
     static contextType = DRContext;
@@ -35,11 +34,12 @@ class MoviesPage extends React.Component {
                         movie: true,
                         tv: false,
                         showBool: true,
-                        mainShow: randMovie
+                        mainShow: randMovie,
+                        forward: false
                     })
                 })
         } else {
-            ExtApiService.getMoviesByPopularity(start)
+            ExtApiService.getTvShowsByPopularity(start)
             .then(shows => {
                 const randShow = shows.results[randIndex];
                 this.setState({
@@ -65,7 +65,7 @@ class MoviesPage extends React.Component {
                     })
                 })
         } else {
-            ExtApiService.getMoviesByPopularity(start)
+            ExtApiService.getTvShowsByPopularity(start)
             .then(shows => {
                 const randShow = shows.results[randIndex];
                 this.setState({
@@ -86,6 +86,9 @@ class MoviesPage extends React.Component {
             type
         }
         this.context.handleSetDateShow(showObj);
+        this.setState({
+            forward: true
+        })
     }
 
     // handleSetPopularity = (value) => {
@@ -97,6 +100,14 @@ class MoviesPage extends React.Component {
     render() {
         let categoryArray = ['Movie', 'TV'];
         console.log(this.state.mainShow);
+
+        if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
+            return <Redirect to='/'></Redirect>
+        }
+
+        if(this.state.forward) {
+            return <Redirect to='/qb-summary'></Redirect>
+        }
         return (
             <main>
                 <Header />

@@ -82,10 +82,10 @@ class App extends React.Component {
     }
 
     console.log('DATE OBJECTS: ')
-    console.log(this.state.dateMeal);
-    console.log(this.state.dateDrink);
-    console.log(this.state.dateActivity);
-    console.log(this.state.dateShow);
+    console.log('Meal: ', this.state.dateMeal);
+    console.log('Drink: ', this.state.dateDrink);
+    console.log('Activity: ', this.state.dateActivity);
+    console.log('Show: ',this.state.dateShow);
     console.log('--------------------')
     console.log('app location ', this.state.location);
     console.log('app latlong ', this.state.latLong)

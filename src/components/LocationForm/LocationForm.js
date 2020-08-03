@@ -104,7 +104,7 @@ const LocationForm = () => {
                 let locationObj = { lat: latNum, lng: lngNum };
                 let placeOpen = true;
                 let placeRating = results[i].rating;
-                let photoUrl = 'https://via.placeholder.com/400';
+                let photoUrl = 'https://img.favpng.com/15/13/2/urban-park-cartoon-png-favpng-GyXzR7iKQadY6M60ED5b38UwK.jpg';
                 // if(results[i].photos && results[i].photos.length > 0) {
                 //     photoUrl = results[i].photos[0].getUrl({ maxHeight: 250 });
                 // }
