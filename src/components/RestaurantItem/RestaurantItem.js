@@ -1,55 +1,56 @@
-/* global google */
 import React from 'react';
 import DRContext from '../../context/DRContext';
-import { useContext, useState, useEffect } from 'react';
 
-const google = window.google = window.google ? window.google : {};
+class RestaurantItem extends React.Component {
+    static contextType = DRContext;
 
-const RestaurantItem = () => {
+    constructor(props) {
+        super(props);
+    }
 
-    const { latLong, location } = useContext(DRContext);
-    const { lat, lng } = latLong;
+    render() {
+        console.log(this.props.restaurant);
+        let restaurantMain = this.props.restaurant
+        let featuredImg = restaurantMain.featured_image;
 
-    console.log(latLong);
-    console.log(lat, lng);
-    let map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 25.276987, lng: 55.296249 },
-        zoom: 15
-    });
-
-    let service = new google.maps.places.PlacesService(map);
-    let request = {
-        location: new google.maps.LatLng(lat, lng),
-        radius: 500,
-        type: ['restaurant']
-    };
-
-    service.nearbySearch(request, function(results) {
-        console.log(results.length);
-        for(let i = 0; i < results.length; i++) {
-            console.log(results[i].name, results[i].types)
+        if (restaurantMain.featured_image === '' || restaurantMain.featured_image === null) {
+            featuredImg = "https://www.clipartkey.com/mpngs/m/77-776665_lunch-clipart-lunch-date-couple-date-night-cartoon.png"
         }
-    })
 
-    return (
-        <div className="main-container">
-            <h3 className="text-center mb-10">Name</h3>
-            <p className="text-center">
-                <img src="https://via.placeholder.com/400" className="preview-image mb-10" />
-            </p>
+        return (
+            <div className="main-container">
+                <h3 className="text-center mb-10">{restaurantMain.name}</h3>
+                <p className="text-center">
+                    <img src={featuredImg} className="preview-image mb-10" />
+                </p>
 
-            <p className="text-center mb-20">Category: </p>
+                <p className="text-center">{restaurantMain.location.address}</p>
+                <p className="text-center">Phone Number: {restaurantMain.phone_numbers}</p>
 
-            <div className="flex-center">
-                <a href="" className="recipe-link center" target="_blank">View Recipe</a>
+                <div className="divider center mb-20 mt-20"></div>
+
+                <p className="text-center">Cuisine Type: {restaurantMain.cuisines}</p>
+
+                <div className="divider center mb-20 mt-20"></div>
+
+                <p className="text-center">Price Range: {'$'.repeat(restaurantMain.price_range)}</p>
+                <p className="text-center">Avg Cost for Two: {'$'}{restaurantMain.average_cost_for_two}</p>
+
+                <div className="divider center mb-20 mt-20"></div>
+
+                <p className="text-center"> Rating: {restaurantMain.user_rating.aggregate_rating} out of 5</p>
+
+                <div className="divider center mb-20 mt-20"></div>
+
+                <div className="flex-center flex-col">
+                    <a href={restaurantMain.url} className="recipe-link center" target="_blank">See Full Details</a>
+                    <p className="text-center fs-xs mt-5"><i>Powered By Zomato</i></p>
+                </div>
+
             </div>
+        )
+    }
 
-            <div id="map">
-
-            </div>
-
-        </div>
-    )
 
 }
 

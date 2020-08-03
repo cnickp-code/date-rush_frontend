@@ -3,13 +3,53 @@ import Header from '../../components/Header/Header';
 import Nav from '../../components/Nav/Nav';
 import ActivityItem from '../../components/ActivityItem/ActivityItem';
 import QuickBuildTracker from '../../components/QuickBuildTracker/QuickBuildTracker';
+import { Redirect } from 'react-router-dom';
 import DRContext from '../../context/DRContext';
 
 class ActivityPage extends React.Component {
     static contextType = DRContext;
-    
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+            activity: null,
+        }
+    }
+
+    handleRandomActivity = () => {
+        const randIndex = Math.floor(Math.random() * Math.floor(this.context.places.length - 1));
+
+        const activity = this.context.places[randIndex];
+
+        this.setState({
+            loading: false,
+            activity
+        })
+    }
+
+    handleAddActivity = () => {
+        this.context.handleSetDateActivity(this.state.activity.id);
+    }
+
+    componentDidMount() {
+        const randIndex = Math.floor(Math.random() * Math.floor(this.context.places.length - 1));
+
+        const activity = this.context.places[randIndex];
+
+        this.setState({
+            loading: false,
+            activity
+        })
+    }
+
     render() {
+        if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
+            return <Redirect to='/'></Redirect>
+        }
         console.log(this.context.places);
+        console.log(this.state.activity);
+
         return (
             <main>
                 <Header />
@@ -18,16 +58,21 @@ class ActivityPage extends React.Component {
                     <h2 className="text-center mb-10 mt-10">STEP 1 / What to do?</h2>
 
                     <div className="button-container">
-                        <button className="prev-next-button pad-5"> &lt&lt Prev</button>
-                        <button className="prev-next-button pad-5">Next &gt&gt</button>
+                        <button
+                            className="prev-next-button pad-5 item-btn"
+                            onClick={this.handleRandomActivity}
+                        >Next Place</button>
                     </div>
                 </section>
 
                 <section>
-                    <ActivityItem />
+                    {!this.state.loading && <ActivityItem activity={this.state.activity} />}
 
                     <div className="add-button-container mt-20 mb-20">
-                        <button className="add-button pad-5 center">Add To Date</button>
+                        <button
+                            className="add-button pad-5 center item-btn"
+                            onClick={this.handleAddActivity}
+                        >Add To Date</button>
                     </div>
 
                     <QuickBuildTracker />

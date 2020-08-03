@@ -46,10 +46,18 @@ html {
   border-top: 1px dotted var(--color-secondary-2-4);
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
 .flex-center {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+}
+
+.fs-xs {
+  font-size: x-small;
 }
 
 .fs-xl {
@@ -66,6 +74,10 @@ html {
 .center {
   margin-left: auto;
   margin-right: auto;
+}
+
+.mt-5 {
+  margin-top: 5px;
 }
 
 .mt-10 {
@@ -367,13 +379,9 @@ text-decoration: underline;
 }
 
 .map-container {
-  width: 200px;
-  height: 200px;
-  border: 1px solid #A51E4B;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .add-button-container {

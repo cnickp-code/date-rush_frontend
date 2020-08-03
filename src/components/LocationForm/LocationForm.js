@@ -104,41 +104,43 @@ const LocationForm = () => {
                 let locationObj = { lat: latNum, lng: lngNum };
                 let placeOpen = true;
                 let placeRating = results[i].rating;
-                let photoUrl = '';
-                if(results[i].photos && results[i].photos.length > 0) {
-                    photoUrl = results[i].photos[0].getUrl({ maxHeight: 250 });
-                }
+                let photoUrl = 'https://via.placeholder.com/400';
+                // if(results[i].photos && results[i].photos.length > 0) {
+                //     photoUrl = results[i].photos[0].getUrl({ maxHeight: 250 });
+                // }
 
                 placeObj = {
+                    id: results[i].place_id,
                     name: results[i].name,
                     photoUrl,
                     types: results[i].types,
                     location: locationObj,
+                    address: results[i].vicinity,
                     isOpen: placeOpen,
                     rating: placeRating
                 }
                 placeStore.push(placeObj);
             }
-            if(pagetoken.hasNextPage) {
-                handleSetPlaces(placeStore);
-                pagetoken.nextPage();
-            } else {
-                handleSetPlaces(placeStore);
-                handleSetLoader(false);
-                setForward(true);
-            }
+
+            handleSetPlaces(placeStore);
+            handleSetLoader(false);
+            setForward(true);
+            // if(pagetoken.hasNextPage) {
+            //     handleSetPlaces(placeStore);
+            //     pagetoken.nextPage();
+            // } else {
+            //     handleSetPlaces(placeStore);
+            //     handleSetLoader(false);
+            //     setForward(true);
+            // }
 
         })
-        console.log('ran')
 
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log('submitted');
-        console.log(latLng);
-        console.log(address);
         handleSetLocation(latLng, address);
         initMap();
         
@@ -209,12 +211,7 @@ const LocationForm = () => {
             </form>
 
             <div id='map'></div>
-            {/* <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                zoom={10}
-                center={center}
-                options={options}
-            ></GoogleMap> */}
+
         </div>
 
         

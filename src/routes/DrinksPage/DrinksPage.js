@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Nav from '../../components/Nav/Nav';
 import DrinkItem from '../../components/DrinkItem/DrinkItem';
@@ -106,7 +107,11 @@ class DrinksPage extends React.Component {
     }
 
     render() {
-        let categoryArray = ['Alcoholic', 'Non-Alcoholic']
+        let categoryArray = ['Alcoholic', 'Non-Alcoholic'];
+
+        if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
+            return <Redirect to='/'></Redirect>
+        }
 
         return (
             <main>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Nav from '../../components/Nav/Nav';
 import MealItem from '../../components/MealItem/MealItem';
@@ -16,32 +17,78 @@ class MealPage extends React.Component {
         this.state = {
             loading: true,
             meal: null,
-            category: null,
-            restaurants: null,
+            in: false,
+            out: false,
+            restaurants: [],
+            restaurant: {}
         }
     }
 
     handleSetCategory = (category) => {
-        this.setState({
-            category
-        })
+        console.log(category)
+        if(category === 'In') {
+            this.setState({
+                in: true,
+                out: false,
+            })
+        } else {
+            const randIndex = Math.floor(Math.random() * Math.floor(this.state.restaurants.length - 1));
+            const restaurant = this.state.restaurants[randIndex].restaurant;
+
+            this.setState({
+                restaurant,
+                in: false,
+                out: true
+            })
+        }
+
     }
 
     handleRandomMeal = () => {
-        ExtApiService.getMeal()
+        if(this.state.in) {
+            ExtApiService.getMeal()
             .then(meal => {
                 this.setState({
                     loading: false,
                     meal
                 })
             })
+        } else {
+            const randIndex = Math.floor(Math.random() * Math.floor(this.state.restaurants.length - 1));
+            const restaurant = this.state.restaurants[randIndex].restaurant;
+
+            this.setState({
+                restaurant,
+            })
+        }
+
     }
 
     handleAddMeal = () => {
-        this.context.handleSetDateMeal(this.state.meal.meals[0].idMeal);  
+        let mealObj;
+        if(this.state.in) {
+            mealObj = {
+                type: 'In',
+                id: this.state.meal.meals[0].idMeal
+            }
+            this.context.handleSetDateMeal(mealObj); 
+        } else {
+            mealObj = {
+                type: 'Out',
+                id: this.state.restaurant.id
+            }
+            this.context.handleSetDateMeal(mealObj);
+        }
+         
     }
 
+
+
     componentDidMount() {
+        if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
+            return <Redirect to='/'></Redirect>
+        }
+
         ExtApiService.getMeal()
             .then(meal => {
                 this.setState({
@@ -50,16 +97,36 @@ class MealPage extends React.Component {
                 })
             })
 
-        // ExtApiService.getPlacesByLocation(this.context.latLong, 'restaurant')
-        //     .then(restaurants => {
-        //         console.log(restaurants);
-        //     })
+        let i = 0;
+        while(i <= 5) {
+            ExtApiService.getRestaurantsByLocation(this.context.latLong.lat, this.context.latLong.lng, i, 2000)
+                .then(results => {
+                    if(this.state.restaurants.length > 0) {
+                        this.setState({
+                            restaurants: [...this.state.restaurants, ...results.restaurants]
+                        })
+                    } else {
+                        this.setState({
+                            restaurants: results.restaurants
+                        })
+                    }
+
+                })
+            i++;
+        }
+
     }
 
     render() {
         let categoryArray = ['In', 'Out']
 
+        if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
+            return <Redirect to='/'></Redirect>
+        }
+
         console.log(this.state.meal);
+        console.log(this.state.restaurants);
+        
 
         return (
             <main>
@@ -82,12 +149,14 @@ class MealPage extends React.Component {
                         <button
                         className="prev-next-button pad-5 item-btn"
                         onClick={this.handleRandomMeal}
-                        >Next Meal</button>
+                        >Next</button>
                     </div>
                 </section>
 
                 <section>
-                    {!this.state.loading && <MealItem meal={this.state.meal.meals[0]} />}
+                    {!this.state.loading && this.state.in && <MealItem meal={this.state.meal.meals[0]} />}
+
+                    {!this.state.loading && this.state.out && <RestaurantItem restaurant={this.state.restaurant} />}
 
                     <div className="add-button-container mt-20 mb-20">
                         <button 
@@ -99,7 +168,7 @@ class MealPage extends React.Component {
                     <QuickBuildTracker />
                 </section>
 
-                <RestaurantItem />
+                
             </main>
         )
     }

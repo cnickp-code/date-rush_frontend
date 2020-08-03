@@ -9,8 +9,9 @@ class App extends React.Component {
     this.state = {
       latLong: null,
       location: null,
-      dateMeal: null,
+      dateMeal: {},
       dateDrink: null,
+      dateActivity: null,
       places: [],
       loading: false,
     }
@@ -47,12 +48,19 @@ class App extends React.Component {
     })
   }
 
+  handleSetDateActivity = (id) => {
+    this.setState({
+      dateActivity: id
+    })
+  }
+
   render() {
     let contextValue = {
       latLong: this.state.latLong,
       location: this.state.location,
       dateMeal: this.state.dateMeal,
       dateDrink: this.state.dateDrink,
+      dateActivity: this.state.dateActivity,
       places: this.state.places,
       loading: this.state.loading,
 
@@ -60,7 +68,8 @@ class App extends React.Component {
       handleSetDateMeal: this.handleSetDateMeal,
       handleSetDateDrink: this.handleSetDateDrink,
       handleSetPlaces: this.handleSetPlaces,
-      handleSetLoader: this.handleSetLoader
+      handleSetLoader: this.handleSetLoader,
+      handleSetDateActivity: this.handleSetDateActivity,
     }
 
     console.log(this.state.dateMeal);

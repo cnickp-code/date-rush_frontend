@@ -41,8 +41,13 @@ const ExtApiService = {
                     : res.json()
             )
     },
-    getPlacesByLocation(latLongStr, type) {
-        return fetch(`${config.PLACES_API_ENDPOINT}?radius=10000&type=${type}&location=${latLongStr}&key=${config.GOOGLE_API_KEY}`)
+    getRestaurantsByLocation(lat, lng, start, radius) {
+        // let key = config.RESTAURANT_API_KEY;
+        return fetch(`${config.RESTAURANTS_API_ENDPOINT}start=${start}&lat=${lat}&lon=${lng}&radius=${radius}`, {
+            headers: {
+                'user-key': '4da470aab3c605b25b7c16a75d16929e'
+            }
+        })
             .then(res =>
                 (!res.ok)
                     ? res.json().then(e => Promise.reject(e))
