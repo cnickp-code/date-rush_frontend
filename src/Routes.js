@@ -11,6 +11,9 @@ import NotFoundPage from '../src/routes/NotFoundPage/NotFoundPage';
 import ProfileSummaryPage from '../src/routes/ProfileSummaryPage/ProfileSummaryPage';
 import LoginPage from '../src/routes/LoginPage/LoginPage';
 import SignupPage from '../src/routes/SignupPage/SignupPage';
+import LandingPage from '../src/routes/LandingPage/LandingPage';
+import PublicRoute from '../src/components/Utils/PublicRoute';
+import PrivateRoute from '../src/components/Utils/PrivateRoute';
 
 class Routes extends React.Component {
     render() {
@@ -18,43 +21,39 @@ class Routes extends React.Component {
             <Switch>
                 <Route
                     exact path='/'
+                    component={LandingPage}
+                />
+                <PrivateRoute
+                    exact path='/home'
                     component={HomePage}
                 />
-                <Route
+                <PrivateRoute
                     exact path='/qb-activity'
                     component={ActivityPage}
                 />
-                <Route
+                <PrivateRoute
                     exact path='/qb-meals'
                     component={MealPage}
                 />
-                <Route
+                <PrivateRoute
                     exact path='/qb-drinks'
                     component={DrinksPage}
                 />
-                <Route
+                <PrivateRoute
                     exact path='/qb-movies'
                     component={MoviesPage}
                 />
-                <Route
+                <PrivateRoute
                     exact path='/profile'
                     component={ProfilePage}
                 />
-                <Route
+                <PrivateRoute
                     exact path='/profile-summary'
                     component={ProfileSummaryPage}
                 />
-                <Route
+                <PrivateRoute
                     exact path='/qb-summary'
                     component={QBSummaryPage}
-                />
-                <Route
-                    exact path='/login'
-                    component={LoginPage}
-                />
-                <Route
-                    exact path='/signup'
-                    component={SignupPage}
                 />
                 {/* <Route
                     path='*'

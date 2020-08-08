@@ -12,7 +12,7 @@ export default function PrivateRoute({ component, ...props }) {
                     ? <Component {...renderProps} />
                     : <Redirect
                         to={{
-                            pathName: '/signup',
+                            pathName: '/',
                             state: { from: renderProps.location }
                         }} />
             )}

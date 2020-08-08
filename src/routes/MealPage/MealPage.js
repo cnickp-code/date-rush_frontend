@@ -42,7 +42,6 @@ class MealPage extends React.Component {
                 out: true
             })
         }
-
     }
 
     handleRandomMeal = () => {
