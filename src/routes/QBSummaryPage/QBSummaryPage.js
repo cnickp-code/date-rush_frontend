@@ -15,7 +15,7 @@ const QBSummaryPage = () => {
     const { places, location, latLong } = useContext(DRContext);
 
     if (places.length < 1 || location === null || latLong === null) {
-        return <Redirect to='/'></Redirect>
+        return <Redirect to='/home'></Redirect>
     }
 
     return (
@@ -33,7 +33,7 @@ const QBSummaryPage = () => {
                     <button className="add-button pad-5 center">Save Date</button>
                 </div>
 
-                <QuickBuildTracker />
+                {/* <QuickBuildTracker /> */}
             </section>
         </main>
     )

@@ -17,6 +17,8 @@ class MealPage extends React.Component {
         this.state = {
             forward: false,
             loading: true,
+            catPicked: false,
+            selectedCategory: null,
             meal: null,
             in: false,
             out: false,
@@ -31,6 +33,8 @@ class MealPage extends React.Component {
             this.setState({
                 in: true,
                 out: false,
+                catPicked: true,
+                selectedCategory: category
             })
         } else {
             const randIndex = Math.floor(Math.random() * Math.floor(this.state.restaurants.length - 1));
@@ -39,7 +43,9 @@ class MealPage extends React.Component {
             this.setState({
                 restaurant,
                 in: false,
-                out: true
+                out: true,
+                catPicked: true,
+                selectedCategory: category
             })
         }
     }
@@ -90,7 +96,7 @@ class MealPage extends React.Component {
 
     componentDidMount() {
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
-            return <Redirect to='/'></Redirect>
+            return <Redirect to='/home'></Redirect>
         }
 
         ExtApiService.getMeal()
@@ -143,9 +149,9 @@ class MealPage extends React.Component {
                 <section>
                     <h2 className="text-center mb-10 mt-10">STEP 2 / What to Eat?</h2>
 
-                    <CategorySelect onCategorySelect={this.handleSetCategory} categories={categoryArray} />
+                    <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray} />
 
-                    <div className="button-container">
+                    {this.state.catPicked && <div className="button-container">
                         {/* <button 
                         className="prev-next-button pad-5 item-btn"
                         onClick={this.handlePrev}> {"<<"} Prev</button>
@@ -158,7 +164,7 @@ class MealPage extends React.Component {
                         className="prev-next-button pad-5 item-btn"
                         onClick={this.handleRandomMeal}
                         >Next</button>
-                    </div>
+                    </div> }
                 </section>
 
                 <section>
@@ -166,14 +172,14 @@ class MealPage extends React.Component {
 
                     {!this.state.loading && this.state.out && <RestaurantItem restaurant={this.state.restaurant} />}
 
-                    <div className="add-button-container mt-20 mb-20">
+                    {this.state.catPicked && <div className="add-button-container mt-20 mb-20">
                         <button 
                         className="add-button pad-5 center item-btn"
                         onClick={this.handleAddMeal}
                         >Add To Date</button>
-                    </div>
+                    </div> }
 
-                    <QuickBuildTracker />
+                    {/* <QuickBuildTracker /> */}
                 </section>
 
                 

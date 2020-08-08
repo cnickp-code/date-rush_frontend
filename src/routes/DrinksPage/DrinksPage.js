@@ -142,7 +142,7 @@ class DrinksPage extends React.Component {
         console.log(this.state.drink);
 
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
-            return <Redirect to='/'></Redirect>
+            return <Redirect to='/home'></Redirect>
         }
         if(this.state.forward) {
             return <Redirect to='/qb-movies'></Redirect>
@@ -177,7 +177,7 @@ class DrinksPage extends React.Component {
                         >Add To Date</button>
                     </div>}
 
-                    <QuickBuildTracker />
+                    {/* <QuickBuildTracker /> */}
                 </section>
             </main>
         )

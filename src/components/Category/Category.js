@@ -7,9 +7,16 @@ class Category extends React.Component {
     }
 
     render() {
+        let buttonRender;
+
+        if(this.props.selectedCategory && this.props.selectedCategory === this.props.category) {
+            buttonRender = <div className="category-filled" onClick={this.sendCategory} disabled={true}>{this.props.category}</div>
+        } else {
+            buttonRender = <div className="category" onClick={this.sendCategory}>{this.props.category}</div>
+        }
         return (
             <>
-                <div className="category" onClick={this.sendCategory}>{this.props.category}</div>
+                {buttonRender}
             </>
         )
     }

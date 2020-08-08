@@ -13,7 +13,7 @@ class CategorySelect extends React.Component {
 
     render() {
         let categoryDisplay = this.props.categories.map((cat, i) => {
-            return <Category key={i} category={cat} onCategorySelect={this.props.onCategorySelect}/>
+            return <Category selectedCategory={this.props.selectedCategory} key={i} category={cat} onCategorySelect={this.props.onCategorySelect}/>
         })
 
         return (

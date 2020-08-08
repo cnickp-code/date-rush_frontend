@@ -15,6 +15,8 @@ class MoviesPage extends React.Component {
         super(props);
         this.state = {
             category: null,
+            catPicked: false,
+            selectedCategory: null,
             movie: false,
             tv: false,
             showBool: false,
@@ -35,7 +37,9 @@ class MoviesPage extends React.Component {
                         tv: false,
                         showBool: true,
                         mainShow: randMovie,
-                        forward: false
+                        forward: false,
+                        catPicked: true,
+                        selectedCategory: category
                     })
                 })
         } else {
@@ -46,7 +50,9 @@ class MoviesPage extends React.Component {
                     movie: false,
                     tv: true,
                     showBool: true,
-                    mainShow: randShow
+                    mainShow: randShow,
+                    catPicked: true,
+                    selectedCategory: category
                 })
             })
         }
@@ -102,7 +108,7 @@ class MoviesPage extends React.Component {
         console.log(this.state.mainShow);
 
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
-            return <Redirect to='/'></Redirect>
+            return <Redirect to='/home'></Redirect>
         }
 
         if(this.state.forward) {
@@ -115,7 +121,7 @@ class MoviesPage extends React.Component {
                 <section>
                     <h2 className="text-center mb-10 mt-10">STEP 4 / What to Watch?</h2>
 
-                    <CategorySelect onCategorySelect={this.handleSetCategory} categories={categoryArray}/>
+                    <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray}/>
 
                     {/* <div className="popularity-container center mt-20 mb-20">
                         <h4 className="text-center">Select popularity:</h4>
@@ -142,7 +148,7 @@ class MoviesPage extends React.Component {
                         >Add To Date</button>
                     </div>}
 
-                    <QuickBuildTracker />
+                    {/* <QuickBuildTracker /> */}
                 </section>
             </main>
         )

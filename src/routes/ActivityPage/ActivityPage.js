@@ -49,7 +49,7 @@ class ActivityPage extends React.Component {
 
     render() {
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
-            return <Redirect to='/'></Redirect>
+            return <Redirect to='/home'></Redirect>
         }
         if(this.state.forward) {
             return <Redirect to='/qb-meals'></Redirect>
@@ -68,7 +68,7 @@ class ActivityPage extends React.Component {
                         <button
                             className="prev-next-button pad-5 item-btn"
                             onClick={this.handleRandomActivity}
-                        >Next Place</button>
+                        ><i class="fas fa-dice "></i></button>
                     </div>
                 </section>
 
@@ -82,7 +82,7 @@ class ActivityPage extends React.Component {
                         >Add To Date</button>
                     </div>
 
-                    <QuickBuildTracker />
+                    {/* <QuickBuildTracker /> */}
                 </section>
             </main>
         )

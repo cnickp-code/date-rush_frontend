@@ -19,11 +19,44 @@ const ActivityItem = (props) => {
         disableDefaultUI: true,
     }
 
-    let openDisplay = <p className="text-center">No</p>
+    let openDisplay = <p className="text-center closed">Closed</p>
 
     if (props.activity.isOpen) {
-        openDisplay = <p className="text-center">Yes</p>
+        openDisplay = <p className="text-center open">Open Now</p>
     }
+
+    let stars;
+
+    if(props.activity.rating) {
+        stars = [];
+        let ratingSplit = props.activity.rating.toString().split('.');
+        let wholeStars = Number(ratingSplit[0]);
+        let decimal = Number(ratingSplit[1]);
+    
+        for(let i = 0; i < 5; i++) {
+            if(i < wholeStars) {
+                stars.push(0);
+            } else if(i === wholeStars && decimal >= 5) {
+                stars.push(1);
+            } else {
+                stars.push(2);
+            } 
+        }
+    
+        stars = stars.map(num => {
+            if(num === 0) {
+                return <div className="star"><i class="fas fa-star"></i></div>
+            } else if(num === 1) {
+               return <div className="star"><i class="fas fa-star-half-alt"></i></div> 
+            } else {
+                return <div className="star"><i class="far fa-star"></i></div>
+            }
+        })
+    } else {
+        stars = <p className="text-center">No rating found</p>
+    }
+
+
 
     return (
         <div className="main-container">
@@ -36,12 +69,16 @@ const ActivityItem = (props) => {
 
             <div className="divider center mb-20 mt-20"></div>
 
-            <p className="text-center">Is it open?</p>
+           <div className="open-container center">
             {openDisplay}
+           </div>
+            
 
             <div className="divider center mb-20 mt-20"></div>
 
-            <p className="text-center"> Rating: {props.activity.rating} out of 5</p>
+            <div className="rating-container">
+                {stars}
+            </div>
 
             <div className="divider center mb-20 mt-20"></div>
 

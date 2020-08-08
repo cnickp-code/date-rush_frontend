@@ -163,7 +163,7 @@ const LocationForm = () => {
 
     return (
         <div className="form-container">
-            <h4 className="mb-10 text-center">Get Started!</h4>
+            <h4 className="mb-10 text-center home-header">Get Started!</h4>
             <form id="home-form" onSubmit={handleSubmit}>
                 {/* <input
                     type="text"

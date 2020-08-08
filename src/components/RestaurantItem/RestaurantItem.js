@@ -17,11 +17,42 @@ class RestaurantItem extends React.Component {
         if (restaurantMain.featured_image === '' || restaurantMain.featured_image === null) {
             featuredImg = "https://www.clipartkey.com/mpngs/m/77-776665_lunch-clipart-lunch-date-couple-date-night-cartoon.png"
         }
-        if(restaurantMain.average_cost_for_two > 0) {
+        if (restaurantMain.average_cost_for_two > 0) {
             avgCost = <p className="text-center">Avg Cost for Two: {'$'}{restaurantMain.average_cost_for_two}</p>
         }
-        if(restaurantMain.user_rating.aggregate_rating === 0) {
+        if (restaurantMain.user_rating.aggregate_rating === 0) {
             ratingEl = <p className="text-center"> Rating: {restaurantMain.user_rating.aggregate_rating} out of 5</p>
+        }
+
+        let stars;
+
+        if (restaurantMain.user_rating.aggregate_rating) {
+            stars = [];
+            let ratingSplit = restaurantMain.user_rating.aggregate_rating.toString().split('.');
+            let wholeStars = Number(ratingSplit[0]);
+            let decimal = Number(ratingSplit[1]);
+
+            for (let i = 0; i < 5; i++) {
+                if (i < wholeStars) {
+                    stars.push(0);
+                } else if (i === wholeStars && decimal >= 5) {
+                    stars.push(1);
+                } else {
+                    stars.push(2);
+                }
+            }
+
+            stars = stars.map(num => {
+                if (num === 0) {
+                    return <div className="star"><i class="fas fa-star"></i></div>
+                } else if (num === 1) {
+                    return <div className="star"><i class="fas fa-star-half-alt"></i></div>
+                } else {
+                    return <div className="star"><i class="far fa-star"></i></div>
+                }
+            })
+        } else {
+            stars = <p className="text-center">No rating found</p>
         }
 
         return (
@@ -45,8 +76,9 @@ class RestaurantItem extends React.Component {
 
                 <div className="divider center mb-20 mt-20"></div>
 
-                <p className="text-center"> Rating: {restaurantMain.user_rating.aggregate_rating} out of 5</p>
-
+                <div className="rating-container">
+                    {stars}
+                </div>
                 <div className="divider center mb-20 mt-20"></div>
 
                 <div className="flex-center flex-col">
