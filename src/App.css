@@ -41,11 +41,15 @@ html {
 
 header {
   height: 140px;
-  border-bottom: 1px solid var(--color-secondary-2-4);
+  /* border-bottom: 1px solid var(--color-secondary-2-4); */
 }
 
 
 /* GLOBAL STYLES */
+
+.bottom-spacer {
+  height: 80px;
+}
 
 .divider {
   width: 60%;
@@ -413,11 +417,29 @@ text-decoration: underline;
 
 /* HOME STYLE */
 
+.home-top-wrapper {
+  padding: 20px;
+  height: 300px;
+  background-image: url('https://upgradedpoints.com/wp-content/uploads/2020/02/couple-on-a-date.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home-mid-wrapper {
+  /* background: rgb(77, 76, 76); */
+}
+
 .home-container {
+  font-family: var(--font-family-head);
   width: 75%;
   margin-left: auto;
   margin-right: auto;
-  color: rgb(77, 76, 76);
+  color: #d9d9d9;
+  text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
+}
+
+.home-container h2 {
+  margin-top: 0;
 }
 
 #home-form {
@@ -455,6 +477,7 @@ text-decoration: underline;
   align-items: center;
   padding: 10px;
   color: rgb(77, 76, 76);
+  /* color: #e8e8e8; */
 }
 
 .step-card-container {
@@ -473,7 +496,7 @@ text-decoration: underline;
 
 /* ITEM STYLES */
 .item-btn {
-  padding: 10px;
+  padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 10px;
@@ -641,12 +664,47 @@ text-decoration: underline;
 
 /* PROFILE STYLES */
 
+.prof-page-title {
+  color: var(--color-secondary-2-4);
+  font-family: var(--font-family-head);
+}
+
+.profile-main-wrapper {
+  width: 90%;
+  /* border: 2px solid var(--color-secondary-2-4); */
+  padding: 5px;
+  color: var(--font-color-p-dark);
+}
+
+.profile-item-container2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid var(--color-secondary-2-4);
+  border-bottom: 1px solid var(--color-secondary-2-4);
+}
+
+.prof-title-container {
+  width: 85%;
+  border-right: 1px solid var(--color-secondary-2-4);
+}
+
+.prof-button-container {
+  width: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  /* padding-right: 10px; */
+}
+
 .profile-date-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   border: 1px solid #A51E4B;
-  height: 100px;
+  height: 80px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -834,4 +892,43 @@ text-decoration: underline;
 /* MOVIE STYLES */
 .popularity-container {
   width: 60%;
+}
+
+/* NAME FORM STYLES */
+.name-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-secondary-2-4);
+  color: #f7f7f7;
+  position: absolute;
+  left: calc(50% - 150px);
+  top: calc(50% - 80px);
+  width: 300px;
+  height: auto;
+  padding: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.name-form-container h1 {
+  font-family: var(--font-family-head);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.name-form-container input::placeholder {
+  color: #f7f7f7;
+}
+
+.item-btn2 {
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--font-color-p);
+  background-color: var(--font-color-p);
+  color: var(--color-secondary-2-4);
+  outline: none;
+  font-size: 20px;
 }

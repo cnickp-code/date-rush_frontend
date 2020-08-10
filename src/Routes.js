@@ -14,6 +14,7 @@ import SignupPage from '../src/routes/SignupPage/SignupPage';
 import LandingPage from '../src/routes/LandingPage/LandingPage';
 import PublicRoute from '../src/components/Utils/PublicRoute';
 import PrivateRoute from '../src/components/Utils/PrivateRoute';
+import ProfileDateSummary from '../src/components/ProfileDateSummary/ProfileDateSummary';
 
 class Routes extends React.Component {
     render() {
@@ -54,6 +55,10 @@ class Routes extends React.Component {
                 <PrivateRoute
                     exact path='/qb-summary'
                     component={QBSummaryPage}
+                />
+                <PrivateRoute
+                    exact path='/date-summary'
+                    component={ProfileDateSummary}
                 />
                 {/* <Route
                     path='*'

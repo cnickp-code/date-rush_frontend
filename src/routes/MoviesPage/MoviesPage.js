@@ -7,6 +7,7 @@ import CategorySelect from '../../components/CategorySelect/CategorySelect';
 import DRContext from '../../context/DRContext';
 import ExtApiService from '../../services/external-api-service';
 import { Redirect } from 'react-router-dom';
+import SetNameOverlay from '../../components/SetNameOverlay/SetNameOverlay';
 
 class MoviesPage extends React.Component {
     static contextType = DRContext;
@@ -28,7 +29,7 @@ class MoviesPage extends React.Component {
         let start = Math.floor(Math.random() * Math.floor(500));
         let randIndex = Math.floor(Math.random() * Math.floor(20));
 
-        if(category === 'Movie') {
+        if (category === 'Movie') {
             ExtApiService.getMoviesByPopularity(start)
                 .then(movies => {
                     const randMovie = movies.results[randIndex];
@@ -44,17 +45,17 @@ class MoviesPage extends React.Component {
                 })
         } else {
             ExtApiService.getTvShowsByPopularity(start)
-            .then(shows => {
-                const randShow = shows.results[randIndex];
-                this.setState({
-                    movie: false,
-                    tv: true,
-                    showBool: true,
-                    mainShow: randShow,
-                    catPicked: true,
-                    selectedCategory: category
+                .then(shows => {
+                    const randShow = shows.results[randIndex];
+                    this.setState({
+                        movie: false,
+                        tv: true,
+                        showBool: true,
+                        mainShow: randShow,
+                        catPicked: true,
+                        selectedCategory: category
+                    })
                 })
-            })
         }
     }
 
@@ -62,7 +63,7 @@ class MoviesPage extends React.Component {
         let start = Math.floor(Math.random() * Math.floor(500));
         let randIndex = Math.floor(Math.random() * Math.floor(20));
 
-        if(this.state.movie) {
+        if (this.state.movie) {
             ExtApiService.getMoviesByPopularity(start)
                 .then(movies => {
                     const randMovie = movies.results[randIndex];
@@ -72,18 +73,18 @@ class MoviesPage extends React.Component {
                 })
         } else {
             ExtApiService.getTvShowsByPopularity(start)
-            .then(shows => {
-                const randShow = shows.results[randIndex];
-                this.setState({
-                    mainShow: randShow
+                .then(shows => {
+                    const randShow = shows.results[randIndex];
+                    this.setState({
+                        mainShow: randShow
+                    })
                 })
-            })
         }
     }
 
     handleAddShow = () => {
         let type = 'TV';
-        if(this.state.movie) {
+        if (this.state.movie) {
             type = 'Movie';
         }
 
@@ -92,6 +93,11 @@ class MoviesPage extends React.Component {
             type
         }
         this.context.handleSetDateShow(showObj);
+        this.context.handleShowNameOverlay();
+
+    }
+
+    handleForward = () => {
         this.setState({
             forward: true
         })
@@ -111,17 +117,18 @@ class MoviesPage extends React.Component {
             return <Redirect to='/home'></Redirect>
         }
 
-        if(this.state.forward) {
-            return <Redirect to='/qb-summary'></Redirect>
+        if (this.state.forward) {
+            return <Redirect to='/profile'></Redirect>
         }
         return (
             <main>
+                {this.context.nameOverlayShow && <SetNameOverlay handleForward={this.handleForward} />}
                 <Header />
                 <Nav />
                 <section>
                     <h2 className="text-center mb-10 mt-10">STEP 4 / What to Watch?</h2>
 
-                    <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray}/>
+                    <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray} />
 
                     {/* <div className="popularity-container center mt-20 mb-20">
                         <h4 className="text-center">Select popularity:</h4>
@@ -134,7 +141,7 @@ class MoviesPage extends React.Component {
                         <button
                             className="prev-next-button pad-5 item-btn"
                             onClick={this.handleRandom}
-                            >Next</button>
+                        >Next</button>
                     </div>}
                 </section>
 
@@ -142,10 +149,10 @@ class MoviesPage extends React.Component {
                     {this.state.showBool && <MovieItem movieBool={this.state.movie} show={this.state.mainShow} />}
 
                     {this.state.showBool && <div className="add-button-container mt-20 mb-20">
-                        <button 
-                        className="add-button pad-5 center item-btn"
-                        onClick={this.handleAddShow}
-                        >Add To Date</button>
+                        <button
+                            className="add-button pad-5 center item-btn"
+                            onClick={this.handleAddShow}
+                        >Complete Date</button>
                     </div>}
 
                     {/* <QuickBuildTracker /> */}

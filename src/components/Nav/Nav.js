@@ -14,7 +14,7 @@ class Nav extends React.Component {
                     <span></span>
 
                     <ul id="menu">
-                        <li><NavLink to="/" className="mob-nav-link">Home</NavLink></li>
+                        <li><NavLink to="/home" className="mob-nav-link">Home</NavLink></li>
                         <li><NavLink to="/qb-activity" className="mob-nav-link">Activities</NavLink></li>
                         <li><NavLink to="/qb-meals" className="mob-nav-link">Food</NavLink></li>
                         <li><NavLink to="/qb-drinks" className="mob-nav-link">Drinks</NavLink></li>

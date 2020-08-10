@@ -15,7 +15,9 @@ const DateRushApiService = {
         })
     },
     postDate(item) {
+        console.log(item);
         return fetch(`${config.MAIN_API_ENDPOINT}/dates`, {
+            method: 'POST',
             headers: {
                 'Authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',

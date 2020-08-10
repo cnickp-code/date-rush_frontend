@@ -3,6 +3,7 @@ import './App.css';
 import Routes from './Routes';
 import DRContext from './context/DRContext'
 import ExtApiService from './services/external-api-service';
+import DateRushApiService from './services/dr-api-service';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +19,38 @@ class App extends React.Component {
       loading: false,
       movieGenres: [],
       tvGenres: [],
+      quickBuild: false,
+      nameOverlayShow: false,
+      myDates: [],
+      summaryDate: {},
     }
+  }
+
+  handleSetSummaryDate = (date) => {
+    this.setState({
+      summaryDate: date
+    })
+  }
+
+  handleAddProfileDate = (item) => {
+    let newDates = [...this.state.myDates, item]
+
+    this.setState({
+      mydates: newDates
+    })
+  }
+
+  handleShowNameOverlay = () => {
+    console.log('toggle overlay');
+    this.setState({
+      nameOverlayShow: !this.state.nameOverlayShow
+    })
+  }
+
+  handleSetQuickBuild = () => {
+    this.setState({
+      quickBuild: !this.state.quickBuild
+    })
   }
 
   handleSetLocation = (latLong, location) => {
@@ -78,6 +110,14 @@ class App extends React.Component {
           tvGenres: results.genres
         })
       })
+    
+    DateRushApiService.getDates()
+      .then(results => {
+        console.log('my dates ', results)
+        this.setState({
+          myDates: results
+        })
+      })
   }
 
   render() {
@@ -92,6 +132,10 @@ class App extends React.Component {
       loading: this.state.loading,
       movieGenres: this.state.movieGenres,
       tvGenres: this.state.tvGenres,
+      quickBuild: this.state.quickBuild,
+      nameOverlayShow: this.state.nameOverlayShow,
+      myDates: this.state.myDates,
+      summaryDate: this.state.summaryDate,
 
       handleSetLocation: this.handleSetLocation,
       handleSetDateMeal: this.handleSetDateMeal,
@@ -100,6 +144,10 @@ class App extends React.Component {
       handleSetLoader: this.handleSetLoader,
       handleSetDateActivity: this.handleSetDateActivity,
       handleSetDateShow: this.handleSetDateShow,
+      handleSetQuickBuild: this.handleSetQuickBuild,
+      handleShowNameOverlay: this.handleShowNameOverlay,
+      handleAddProfileDate: this.handleAddProfileDate,
+      handleSetSummaryDate: this.handleSetSummaryDate,
     }
 
     console.log('DATE OBJECTS: ')
@@ -114,6 +162,8 @@ class App extends React.Component {
     console.log('genres:')
     console.log(this.state.tvGenres);
     console.log(this.state.movieGenres);
+    console.log('--------------------')
+    console.log(this.state.nameOverlayShow)
 
 
     return (

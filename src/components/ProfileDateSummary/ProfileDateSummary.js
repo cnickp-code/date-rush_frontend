@@ -25,6 +25,9 @@ class ProfileDateSummary extends React.Component {
                     <div className="profile-step">
                         <img className="z-bot" src="https://via.placeholder.com/400" />
                     </div>
+                    <div className="profile-step">
+                        <img className="z-bot" src="https://via.placeholder.com/400" />
+                    </div>
                 </div>
             </div>
         )
