@@ -173,7 +173,7 @@ const LocationForm = () => {
                     required
                 /> */}
 
-                <div>
+                <div className="combobox-container">
                     <Combobox
                         onSelect={async (address) => {
                             setValue(address, false);
