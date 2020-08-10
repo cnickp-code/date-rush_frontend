@@ -15,8 +15,8 @@ class SummaryMovieItem extends React.Component {
 
     componentDidMount() {
         console.log('mounted');
-        if(this.context.dateShow.type === 'Movie') {
-            ExtApiService.getMovieById(this.context.dateShow.id)
+        if(this.context.summaryDate.show_type === 'Movie') {
+            ExtApiService.getMovieById(this.context.summaryDate.show_id)
             .then(show => {
                 console.log(show);
                 this.setState({
@@ -25,7 +25,7 @@ class SummaryMovieItem extends React.Component {
                 })
             })
         } else {
-            ExtApiService.getTvShowById(this.context.dateShow.id)
+            ExtApiService.getTvShowById(this.context.summaryDate.show_id)
             .then(show => {
                 console.log(show);
                 this.setState({
@@ -53,14 +53,15 @@ class SummaryMovieItem extends React.Component {
 
 
         return (
-            <div className="summary-container">
-                <div className=" edit-container">
+            <div className="main-container">
+                {/* <div className=" edit-container">
                     <i className="fas fa-edit"></i>
-                </div>
+                </div> */}
 
                 {!this.state.loading && 
                 <>
                     <h3 className="text-center mb-10">{this.state.show.title}</h3>
+                    <p className="text-center mb-10">Category: {this.context.summaryDate.show_type}</p>
                     <p className="text-center">
                         <img src={`https://image.tmdb.org/t/p/w500/${this.state.show.poster_path}`} className="preview-image mb-10" />
                     </p>

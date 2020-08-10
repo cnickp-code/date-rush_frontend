@@ -1,7 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import TokenService from '../../services/token-service';
+import DRContext from '../../context/DRContext';
 
 class Nav extends React.Component {
+
+    static contextType = DRContext;
+
+    handleResetToDefault = () => {
+        this.context.handleReset();
+    }
+
+    handleLogoutClick = () => {
+        TokenService.clearAuthToken();
+    }
     render() {
         return (
             <nav className="mobile-nav" role="navigation">
@@ -14,16 +26,9 @@ class Nav extends React.Component {
                     <span></span>
 
                     <ul id="menu">
-                        <li><NavLink to="/home" className="mob-nav-link">Home</NavLink></li>
-                        <li><NavLink to="/qb-activity" className="mob-nav-link">Activities</NavLink></li>
-                        <li><NavLink to="/qb-meals" className="mob-nav-link">Food</NavLink></li>
-                        <li><NavLink to="/qb-drinks" className="mob-nav-link">Drinks</NavLink></li>
-                        <li><NavLink to="/qb-movies" className="mob-nav-link">Movies</NavLink></li>
-                        <li><NavLink to="/qb-summary" className="mob-nav-link">Summary</NavLink></li>
-                        <li><NavLink to="/profile" className="mob-nav-link">Profile</NavLink></li>
-                        <li><NavLink to="/profile-summary" className="mob-nav-link">Profile Summary</NavLink></li>
-                        <li><NavLink to="/login" className="mob-nav-link">Login</NavLink></li>
-                        <li><NavLink to="/signup" className="mob-nav-link">Signup</NavLink></li>
+                        <li><NavLink to="/home" className="mob-nav-link" onClick={this.handleResetToDefault}>Home</NavLink></li>
+                        <li><NavLink to="/profile" className="mob-nav-link" onClick={this.handleResetToDefault}>Profile</NavLink></li>
+                        <li><NavLink to="/" className="mob-nav-link" onClick={this.handleLogoutClick}>Log Out</NavLink></li>
                     </ul>
                 </div>
             </nav>

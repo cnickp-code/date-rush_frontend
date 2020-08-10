@@ -22,8 +22,31 @@ class App extends React.Component {
       quickBuild: false,
       nameOverlayShow: false,
       myDates: [],
-      summaryDate: {},
+      summaryDate: null,
     }
+  }
+
+  handleReset = () => {
+    this.setState({
+      dateMeal: {},
+      dateDrink: null,
+      dateActivity: null,
+      dateShow: null
+    })
+  }
+
+  handleDeleteItem = (id) => {
+    let newDates = this.state.myDates.filter(date => date.id !== id);
+
+    this.setState({
+      myDates: newDates
+    })
+  }
+
+  handleSetDates = (dates) => {
+    this.setState({
+      myDates: dates
+    })
   }
 
   handleSetSummaryDate = (date) => {
@@ -40,10 +63,10 @@ class App extends React.Component {
     })
   }
 
-  handleShowNameOverlay = () => {
+  handleShowNameOverlay = (bool) => {
     console.log('toggle overlay');
     this.setState({
-      nameOverlayShow: !this.state.nameOverlayShow
+      nameOverlayShow: bool
     })
   }
 
@@ -148,6 +171,9 @@ class App extends React.Component {
       handleShowNameOverlay: this.handleShowNameOverlay,
       handleAddProfileDate: this.handleAddProfileDate,
       handleSetSummaryDate: this.handleSetSummaryDate,
+      handleSetDates: this.handleSetDates,
+      handleReset: this.handleReset,
+      handleDeleteItem: this.handleDeleteItem
     }
 
     console.log('DATE OBJECTS: ')

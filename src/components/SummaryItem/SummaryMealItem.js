@@ -15,8 +15,8 @@ class SummaryMealItem extends React.Component {
 
     componentDidMount() {
         console.log('meal mounted')
-        if (this.context.dateMeal.type === 'In') {
-            ExtApiService.getMealById(Number(this.context.dateMeal.id))
+        if (this.context.summaryDate.meal_type === 'In') {
+            ExtApiService.getMealById(Number(this.context.summaryDate.meal_id))
                 .then(results => {
                     console.log(results.meals[0]);
                     this.setState({
@@ -32,7 +32,7 @@ class SummaryMealItem extends React.Component {
             //         })
             //     })
         } else {
-            ExtApiService.getRestaurantById(this.context.dateMeal.id)
+            ExtApiService.getRestaurantById(this.context.summaryDate.meal_id)
                 .then(restaurant => {
                     console.log(restaurant);
                     this.setState({
@@ -45,12 +45,11 @@ class SummaryMealItem extends React.Component {
     }
 
     render() {
-        console.log(this.context.dateMeal);
         return (
-            <div className="summary-container">
-                <div className=" edit-container">
+            <div className="main-container">
+                {/* <div className=" edit-container">
                     <i className="fas fa-edit"></i>
-                </div>
+                </div> */}
                 
                 {!this.state.loading && 
                 <>

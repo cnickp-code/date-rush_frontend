@@ -1,5 +1,6 @@
 import React from 'react';
 import DRContext from '../../context/DRContext';
+import DateRushApiService from '../../services/dr-api-service';
 
 class ProfileDateItem extends React.Component {
     static contextType = DRContext;
@@ -7,6 +8,10 @@ class ProfileDateItem extends React.Component {
     handleSetSummary = () => {
         this.context.handleSetSummaryDate(this.props.date);
         this.props.handleRedirect();
+    }
+
+    handleDeleteItem = () => {
+        DateRushApiService.deleteDateItem(this.props.date.id, this.context.handleDeleteItem);
     }
 
     render() {
@@ -19,7 +24,7 @@ class ProfileDateItem extends React.Component {
                         <h3 className="text-center">{date.name}</h3>
                     </div>
                     <div className="prof-button-container">
-                        <div className="trash-button">
+                        <div className="trash-button" onClick={this.handleDeleteItem}>
                             <i className="fs-xl fas fa-trash-alt"></i>
                         </div>
                     </div>

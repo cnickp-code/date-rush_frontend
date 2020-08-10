@@ -17,7 +17,7 @@ class SummaryDrinkItem extends React.Component {
 
     componentDidMount() {
         console.log('mounted')
-        ExtApiService.getDrinkById(Number(this.context.dateDrink))
+        ExtApiService.getDrinkById(Number(this.context.summaryDate.drink_id))
             .then(results => {
                 console.log(results.drinks[0]);
                 this.setState({
@@ -54,10 +54,10 @@ class SummaryDrinkItem extends React.Component {
 
 
         return (
-            <div className="summary-container">
-                <div className=" edit-container">
+            <div className="main-container">
+                {/* <div className=" edit-container">
                     <i className="fas fa-edit"></i>
-                </div>
+                </div> */}
 
                 {!this.state.loading && <h3 className="text-center mb-10">{this.state.drink.strDrink}</h3>}
 

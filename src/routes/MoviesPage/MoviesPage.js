@@ -93,7 +93,7 @@ class MoviesPage extends React.Component {
             type
         }
         this.context.handleSetDateShow(showObj);
-        this.context.handleShowNameOverlay();
+        this.context.handleShowNameOverlay(true);
 
     }
 

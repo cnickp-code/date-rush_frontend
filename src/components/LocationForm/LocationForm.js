@@ -105,9 +105,9 @@ const LocationForm = () => {
                 let placeOpen = true;
                 let placeRating = results[i].rating;
                 let photoUrl = 'https://img.favpng.com/15/13/2/urban-park-cartoon-png-favpng-GyXzR7iKQadY6M60ED5b38UwK.jpg';
-                // if(results[i].photos && results[i].photos.length > 0) {
-                //     photoUrl = results[i].photos[0].getUrl({ maxHeight: 250 });
-                // }
+                if(results[i].photos && results[i].photos.length > 0) {
+                    photoUrl = results[i].photos[0].getUrl({ maxHeight: 250 });
+                }
 
                 placeObj = {
                     id: results[i].place_id,

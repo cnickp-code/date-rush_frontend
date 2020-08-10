@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import DRContext from '../../context/DRContext';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import SummaryActivityItem from '../../components/SummaryItem/SummaryActivityItem';
 import SummaryDrinkItem from '../../components/SummaryItem/SummaryDrinkItem';
 import SummaryMealItem from '../../components/SummaryItem/SummaryMealItem';
@@ -12,10 +12,10 @@ import QuickBuildTracker from '../../components/QuickBuildTracker/QuickBuildTrac
 
 const QBSummaryPage = () => {
 
-    const { places, location, latLong } = useContext(DRContext);
+    const { summaryDate } = useContext(DRContext);
 
-    if (places.length < 1 || location === null || latLong === null) {
-        return <Redirect to='/home'></Redirect>
+    if (summaryDate === null) {
+        return <Redirect to='/profile'></Redirect>
     }
 
     return (
@@ -23,14 +23,25 @@ const QBSummaryPage = () => {
             <Header />
             <Nav />
             <section>
-                <h2 className="text-center mb-10 mt-10">Summary</h2>
+
+                <h2 className="text-center mb-10 mt-10 summary-title center">{summaryDate.name}</h2>
+
+                <div className="add-button-container mt-20 mb-20">
+                    <Link to="/profile">
+                        <button className="add-button pad-5 center item-btn">Go Back</button>
+                    </Link>
+
+                </div>
+
                 <SummaryActivityItem />
                 <SummaryMealItem />
                 <SummaryDrinkItem />
                 <SummaryMovieItem />
 
                 <div className="add-button-container mt-20 mb-20">
-                    <button className="add-button pad-5 center">Save Date</button>
+                    <Link to="/profile">
+                        <button className="add-button pad-5 center item-btn">Go Back</button>
+                    </Link>
                 </div>
 
                 {/* <QuickBuildTracker /> */}

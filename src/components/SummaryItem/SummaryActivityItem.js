@@ -15,7 +15,7 @@ const google = window.google = window.google ? window.google : {};
 
 const SummaryActivityItem = () => {
 
-    const { latLong, dateActivity } = useContext(DRContext);
+    const { summaryDate } = useContext(DRContext);
     const [place, setPlace] = useState({});
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const SummaryActivityItem = () => {
         });
         let service = new google.maps.places.PlacesService(map);
         let request = {
-            placeId: dateActivity
+            placeId: summaryDate.place_id
         }
 
         let placeObj = {};
@@ -52,6 +52,10 @@ const SummaryActivityItem = () => {
             let placeOpen = true;
             let placeRating = results.rating;
             let photoUrl = 'https://img.favpng.com/15/13/2/urban-park-cartoon-png-favpng-GyXzR7iKQadY6M60ED5b38UwK.jpg';
+            if(results.photos && results.photos.length > 0) {
+                photoUrl = results.photos[0].getUrl({ maxHeight: 250 });
+            }
+
 
             placeObj = {
                 id: results.place_id,
@@ -108,10 +112,10 @@ const SummaryActivityItem = () => {
     console.log(place);
 
     return (
-        <div className="summary-container">
-            <div className=" edit-container">
+        <div className="main-container">
+            {/* <div className=" edit-container">
                 <i className="fas fa-edit"></i>
-            </div>
+            </div> */}
             <h3 className="text-center mb-10">{place.name}</h3>
             <p className="text-center">
                 <img src={place.photoUrl} className="preview-image mb-10" />

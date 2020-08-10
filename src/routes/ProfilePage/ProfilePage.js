@@ -5,8 +5,11 @@ import Nav from '../../components/Nav/Nav';
 import DRContext from '../../context/DRContext';
 import ProfileDateItem from '../../components/ProfileDateItem/ProfileDateItem';
 import { Redirect } from 'react-router-dom';
+import DateRushApiService from '../../services/dr-api-service';
 
 class ProfilePage extends React.Component {
+    static contextType = DRContext;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +22,16 @@ class ProfilePage extends React.Component {
     handleRedirectSummary = () => {
         this.setState({
             redirectSummary: !this.state.redirectSummary
+        })
+    }
+
+    componentDidMount() {
+        this.context.handleShowNameOverlay(false);
+
+        DateRushApiService.getDates()
+        .then(results => {
+          console.log('my dates ', results)
+          this.context.handleSetDates(results);
         })
     }
 

@@ -197,7 +197,7 @@ text-decoration: underline;
 #menuToggle input:checked ~ span {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #f7f7f7;
+  background: var(--color-primary-1);
 }
 
 #menuToggle input:checked ~ span:nth-last-child(3) {
@@ -535,6 +535,7 @@ text-decoration: underline;
   width: 85%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 40px;
   border: 1px solid #A51E4B;
   background-color: var(--color-secondary-2-4);
   border-radius: 15px;
@@ -753,6 +754,17 @@ text-decoration: underline;
 }
 
 /* SUMMARY STYLES */
+
+.summary-title {
+  font-family: var(--font-family-head);
+  font-size: 35px;
+  color: var(--color-secondary-2-4);
+  border-top: 1px solid var(--color-secondary-2-4);
+  border-bottom: 1px solid var(--color-secondary-2-4);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 90%;
+}
 
 .summary-container {
   position: relative;
