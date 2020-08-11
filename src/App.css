@@ -482,17 +482,18 @@ text-decoration: underline;
 }
 
 .home-step-card {
-  width: 150px;
+  width: 130px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
   color: rgb(77, 76, 76);
+  margin-bottom: 20px;
   /* color: #e8e8e8; */
 }
 
 .step-card-container {
-  width: 90%;
+  width: 100%;
   padding: 20px;
   display: flex;
   flex-flow: row wrap;
