@@ -12,6 +12,7 @@ class SetNameOverlay extends React.Component {
 
         const dateItem = {
             name: name.value,
+            location: this.context.location,
             place_id: this.context.dateActivity,
             meal_id: this.context.dateMeal.id,
             meal_type: this.context.dateMeal.type,

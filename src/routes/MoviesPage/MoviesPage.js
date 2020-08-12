@@ -129,8 +129,18 @@ class MoviesPage extends React.Component {
                     <div className="page-location-container center">
                         <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
                     </div>
-                    <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray} />
 
+                    <Spring
+                        from={{ opacity: 0 }}
+                        to={{ opacity: 1 }}
+                        config={{ delay: 500, duration: 700 }}
+                    >
+                        {props => (
+                            <div style={props}>
+                                <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray} />
+                            </div>
+                        )}
+                    </Spring>
                     {/* <div className="popularity-container center mt-20 mb-20">
                         <h4 className="text-center">Select popularity:</h4>
                         <p className="text-center fs-xs"><i>1 = Obscure, 100 = Popular</i></p>
@@ -142,7 +152,7 @@ class MoviesPage extends React.Component {
                         <button
                             className="prev-next-button pad-5 item-btn"
                             onClick={this.handleRandom}
-                        >Next</button>
+                        ><i class="fas fa-dice "></i></button>
                     </div>}
                 </section>
 

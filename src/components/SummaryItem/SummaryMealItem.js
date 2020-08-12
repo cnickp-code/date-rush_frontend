@@ -14,33 +14,14 @@ class SummaryMealItem extends React.Component {
     }
 
     componentDidMount() {
-        console.log('meal mounted')
-        if (this.context.summaryDate.meal_type === 'In') {
-            ExtApiService.getMealById(Number(this.context.summaryDate.meal_id))
-                .then(results => {
-                    console.log(results.meals[0]);
-                    this.setState({
-                        meal: results.meals[0],
-                        loading: false
-                    })
+        ExtApiService.getMealById(Number(this.context.summaryDate.meal_id))
+            .then(results => {
+                this.setState({
+                    meal: results.meals[0],
+                    loading: false
                 })
-            // ExtApiService.getMealById(52905)
-            //     .then(results => {
-            //         console.log(results.meals[0]);
-            //         this.setState({
-            //             meal: results.meals[0]
-            //         })
-            //     })
-        } else {
-            ExtApiService.getRestaurantById(this.context.summaryDate.meal_id)
-                .then(restaurant => {
-                    console.log(restaurant);
-                    this.setState({
-                        meal: restaurant,
-                        loading: false
-                    })
-                })
-        }
+            })
+
 
     }
 
@@ -50,20 +31,20 @@ class SummaryMealItem extends React.Component {
                 {/* <div className=" edit-container">
                     <i className="fas fa-edit"></i>
                 </div> */}
-                
-                {!this.state.loading && 
-                <>
-                    <h3 className="text-center mb-10">{this.state.meal.strMeal}</h3>
-                    <p className="text-center">
-                        <img src={this.state.meal.strMealThumb} className="preview-image mb-10" />
-                    </p>
 
-                    <p className="text-center mb-20">Category: {this.state.meal.strArea}</p>
+                {!this.state.loading &&
+                    <>
+                        <h3 className="text-center mb-10">{this.state.meal.strMeal}</h3>
+                        <p className="text-center">
+                            <img src={this.state.meal.strMealThumb} className="preview-image mb-10" />
+                        </p>
 
-                    <div className="flex-center">
-                        <a href={this.state.meal.strSource} className="recipe-link center" target="_blank">View Recipe</a>
-                    </div>
-                </>}
+                        <p className="text-center mb-20">Category: {this.state.meal.strArea}</p>
+
+                        <div className="flex-center">
+                            <a href={this.state.meal.strSource} className="recipe-link center" target="_blank">View Recipe</a>
+                        </div>
+                    </>}
             </div>
         )
     }

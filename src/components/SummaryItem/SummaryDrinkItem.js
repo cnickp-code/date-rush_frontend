@@ -61,19 +61,26 @@ class SummaryDrinkItem extends React.Component {
 
                 {!this.state.loading && <h3 className="text-center mb-10">{this.state.drink.strDrink}</h3>}
 
-                {!this.state.loading && <p className="text-center">
-                    <img src={this.state.drink.strDrinkThumb} className="preview-image mb-10" />
-                </p>}
+                <div className="flex-container">
+                    <div className="left-container">
+                        {!this.state.loading && <p className="text-center">
+                            <img src={this.state.drink.strDrinkThumb} className="preview-image mb-10" />
+                        </p>}
+                    </div>
 
-                <h4 className="mb-10">Ingredients:</h4>
-                {ingredientArray}
 
-                {!this.state.loading && <> <div className="divider center mb-20 mt-20"></div>
-                <h4 className="mt-10 mb-10">Instructions:</h4>
-                <p>{this.state.drink.strInstructions}</p> </>}
+                    <div className="right-drink-container">
+                        <h4 className="text-center mb-10 mt-10">Ingredients:</h4>
+                        {ingredientArray}
 
-                <div className="flex-center">
-                    {/* <a href={this.props.drink.strSource} className="recipe-link center" target="_blank">View Recipe</a> */}
+                        {!this.state.loading && <> <div className="divider center mb-20 mt-20"></div>
+                            <h4 className="text-center mt-10 mb-10">Instructions:</h4>
+                            <p>{this.state.drink.strInstructions}</p> </>}
+
+                        <div className="flex-center">
+                            {/* <a href={this.props.drink.strSource} className="recipe-link center" target="_blank">View Recipe</a> */}
+                        </div>
+                    </div>
                 </div>
             </div>
         )

@@ -38,12 +38,12 @@ class DrinkItem extends React.Component {
 
                         <div className="divider center mb-20 mt-20"></div>
 
-                        <h4 className="mb-10">Ingredients:</h4>
+                        <h4 className="text-center mb-10 mt-10">Ingredients:</h4>
                         {ingredientArray}
 
                         <div className="divider center mb-20 mt-20"></div>
 
-                        <h4 className="mt-10 mb-10">Instructions:</h4>
+                        <h4 className="text-center mt-10 mb-10">Instructions:</h4>
                         <p>{this.props.drink.strInstructions}</p>
 
                         <div className="flex-center">

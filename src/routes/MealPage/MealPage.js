@@ -9,6 +9,7 @@ import ExtApiService from '../../services/external-api-service';
 import DRContext from '../../context/DRContext';
 import RestaurantItem from '../../components/RestaurantItem/RestaurantItem';
 import { Spring } from 'react-spring/renderprops';
+import LoadingOverlay from '../../components/LoadingOverlay/LoadingOverlay';
 
 class MealPage extends React.Component {
     static contextType = DRContext;
@@ -24,7 +25,7 @@ class MealPage extends React.Component {
             in: false,
             out: false,
             restaurants: [],
-            restaurant: {}
+            restaurant: {},
         }
     }
 
@@ -98,6 +99,7 @@ class MealPage extends React.Component {
 
 
     componentDidMount() {
+
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
             return <Redirect to='/home'></Redirect>
         }
@@ -131,6 +133,7 @@ class MealPage extends React.Component {
     }
 
     render() {
+
         let categoryArray = ['In', 'Out']
 
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
@@ -153,7 +156,17 @@ class MealPage extends React.Component {
                     <div className="page-location-container center">
                         <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
                     </div>
-                    <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray} />
+                    <Spring
+                        from={{ opacity: 0 }}
+                        to={{ opacity: 1 }}
+                        config={{ delay: 500, duration: 700 }}
+                    >
+                        {props => (
+                            <div style={props}>
+                                <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray} />
+                            </div>
+                        )}
+                    </Spring>
 
                     {this.state.catPicked && <div className="button-container">
                         {/* <button 
@@ -167,7 +180,7 @@ class MealPage extends React.Component {
                         <button
                             className="prev-next-button pad-5 item-btn"
                             onClick={this.handleRandomMeal}
-                        >Next</button>
+                        ><i class="fas fa-dice "></i></button>
                     </div>}
                 </section>
 

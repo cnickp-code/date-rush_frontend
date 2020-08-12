@@ -22,6 +22,7 @@ class DateSummaryPage extends React.Component {
         super(props)
         this.state = {
             loading: true,
+            location: null,
             dateActivity: {},
             dateMeal: {},
             dateDrink: {},
@@ -66,7 +67,8 @@ class DateSummaryPage extends React.Component {
             .then(results => {
                 console.log(results.drinks[0]);
                 this.setState({
-                    datDrink: results.drinks[0]
+                    location: this.context.summaryDate.location,
+                    dateDrink: results.drinks[0]
                 })
             })
 
@@ -147,12 +149,18 @@ class DateSummaryPage extends React.Component {
         // if (dateMeal && dateDrink && dateShow) {
         //     setLoading(false);
         // }
+
+        console.log(this.state.location);
         return (
             <main>
                 <Header />
                 {/* <Nav /> */}
                 <section>
-                    <h2 className="text-center mb-10 mt-10">Summary</h2>
+                    <h2 className="summary-title center mb-10 mt-10">Summary</h2>
+
+                    <div className="page-location-container center">
+                        <p className="text-center"><i class="fas fa-map-marked-alt"></i> Date Location: {this.state.location}</p>
+                    </div>
                     <div className="add-button-container mt-20 mb-20">
                         <button className="add-button pad-5 center">Go Back</button>
                     </div>

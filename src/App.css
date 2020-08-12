@@ -834,6 +834,7 @@ text-decoration: underline;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 90%;
+  max-width: 500px;
 }
 
 .summary-container {
@@ -1073,7 +1074,7 @@ text-decoration: underline;
     /* display: flex;
     flex-direction: row;
     align-items: center; */
-    width: 40%;
+    width: 60%;
   }
   .right-container {
     display: flex;
@@ -1117,6 +1118,9 @@ text-decoration: underline;
 }
 
 @media screen and (min-width: 1600px) {
+  .home-top-wrapper {
+    height: 70vh;
+  }
   .landing-container {
     left: 44%;
   }

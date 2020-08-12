@@ -167,7 +167,7 @@ class DrinksPage extends React.Component {
                         <button
                             className="prev-next-button pad-5 item-btn"
                             onClick={this.handleRandomDrink}
-                        >Next</button>
+                        ><i class="fas fa-dice "></i></button>
                     </div>}
                 </section>
 

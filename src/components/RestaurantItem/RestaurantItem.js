@@ -58,33 +58,41 @@ class RestaurantItem extends React.Component {
         return (
             <div className="main-container">
                 <h3 className="text-center mb-10">{restaurantMain.name}</h3>
-                <p className="text-center">
-                    <img src={featuredImg} className="preview-image mb-10" />
-                </p>
+                <div className="flex-container">
+                    <div className="left-container">
+                        <p className="text-center">
+                            <img src={featuredImg} className="preview-image mb-10" />
+                        </p>
+                    </div>
+                    <div className="right-container">
+                        <p className="text-center">{restaurantMain.location.address}</p>
+                        <p className="text-center">Phone Number: {restaurantMain.phone_numbers}</p>
 
-                <p className="text-center">{restaurantMain.location.address}</p>
-                <p className="text-center">Phone Number: {restaurantMain.phone_numbers}</p>
+                        <div className="divider center mb-20 mt-20"></div>
 
-                <div className="divider center mb-20 mt-20"></div>
+                        <p className="text-center">Cuisine Type: {restaurantMain.cuisines}</p>
 
-                <p className="text-center">Cuisine Type: {restaurantMain.cuisines}</p>
+                        <div className="divider center mb-20 mt-20"></div>
 
-                <div className="divider center mb-20 mt-20"></div>
+                        <p className="text-center">Price Range: {'$'.repeat(restaurantMain.price_range)}</p>
+                        {avgCost}
 
-                <p className="text-center">Price Range: {'$'.repeat(restaurantMain.price_range)}</p>
-                {avgCost}
+                        <div className="divider center mb-20 mt-20"></div>
 
-                <div className="divider center mb-20 mt-20"></div>
+                        <div className="rating-container">
+                            {stars}
+                        </div>
+                        <div className="divider center mb-20 mt-20"></div>
 
-                <div className="rating-container">
-                    {stars}
+                        <div className="flex-center flex-col">
+                            <a href={restaurantMain.url} className="recipe-link center" target="_blank">See Full Details</a>
+                            <p className="text-center fs-xs mt-5"><i>Powered By Zomato</i></p>
+                        </div>
+                    </div>
                 </div>
-                <div className="divider center mb-20 mt-20"></div>
 
-                <div className="flex-center flex-col">
-                    <a href={restaurantMain.url} className="recipe-link center" target="_blank">See Full Details</a>
-                    <p className="text-center fs-xs mt-5"><i>Powered By Zomato</i></p>
-                </div>
+
+
 
             </div>
         )

@@ -112,7 +112,7 @@ const ExtApiService = {
             ) 
     },
     getRestaurantById(id) {
-        return fetch(`${config.RESTAURANTS_API_ENDPOINT}restaurant?res_id=${id}`, {
+        return fetch(`${config.RESTAURANTS_API_ENDPOINT}/restaurant?res_id=${id}`, {
             headers: {
                 'user-key': '4da470aab3c605b25b7c16a75d16929e'
             }

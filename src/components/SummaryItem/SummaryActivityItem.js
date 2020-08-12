@@ -43,8 +43,8 @@ const SummaryActivityItem = () => {
         }
 
         let placeObj = {};
-        
-        service.getDetails(request, function(results, status, pagetoken) {
+
+        service.getDetails(request, function (results, status, pagetoken) {
             console.log(results);
             let latNum = results.geometry.location.lat();
             let lngNum = results.geometry.location.lng();
@@ -52,7 +52,7 @@ const SummaryActivityItem = () => {
             let placeOpen = true;
             let placeRating = results.rating;
             let photoUrl = 'https://img.favpng.com/15/13/2/urban-park-cartoon-png-favpng-GyXzR7iKQadY6M60ED5b38UwK.jpg';
-            if(results.photos && results.photos.length > 0) {
+            if (results.photos && results.photos.length > 0) {
                 photoUrl = results.photos[0].getUrl({ maxHeight: 250 });
             }
 
@@ -80,27 +80,27 @@ const SummaryActivityItem = () => {
 
     let stars;
 
-    if(place.rating) {
+    if (place.rating) {
         stars = [];
         let ratingSplit = place.rating.toString().split('.');
         let wholeStars = Number(ratingSplit[0]);
         let decimal = Number(ratingSplit[1]);
-    
-        for(let i = 0; i < 5; i++) {
-            if(i < wholeStars) {
+
+        for (let i = 0; i < 5; i++) {
+            if (i < wholeStars) {
                 stars.push(0);
-            } else if(i === wholeStars && decimal >= 5) {
+            } else if (i === wholeStars && decimal >= 5) {
                 stars.push(1);
             } else {
                 stars.push(2);
-            } 
+            }
         }
-    
+
         stars = stars.map(num => {
-            if(num === 0) {
+            if (num === 0) {
                 return <div className="star"><i class="fas fa-star"></i></div>
-            } else if(num === 1) {
-               return <div className="star"><i class="fas fa-star-half-alt"></i></div> 
+            } else if (num === 1) {
+                return <div className="star"><i class="fas fa-star-half-alt"></i></div>
             } else {
                 return <div className="star"><i class="far fa-star"></i></div>
             }
@@ -122,38 +122,47 @@ const SummaryActivityItem = () => {
                 {/* <img src='https://via.placeholder.com/400' className="preview-image mb-10" /> */}
             </p>
 
-            <p className="text-center">{place.address}</p>
+            <div className="flex-container">
+                <div className="left-container">
+                    <p className="text-center">{place.address}</p>
 
 
-            <div className="divider center mb-20 mt-20"></div>
+                    <div className="divider center mb-20 mt-20"></div>
 
-            <div className="open-container center">
-            {openDisplay}
-           </div>
-            
+                    <div className="open-container center">
+                        {openDisplay}
+                    </div>
 
-            <div className="divider center mb-20 mt-20"></div>
 
-            <div className="rating-container">
-                {stars}
+                    <div className="divider center mb-20 mt-20"></div>
+
+                    <div className="rating-container">
+                        {stars}
+                    </div>
+
+                    <div className="divider center mb-20 mt-20"></div>
+                </div>
+
+                <div className="right-container">
+                    <div className="map-container" >
+                        <GoogleMap
+                            mapContainerStyle={mapContainerStyle}
+                            zoom={13}
+                            center={center}
+                            options={options}
+                        >
+                            <Marker position={center} />
+
+                        </GoogleMap>
+                    </div>
+                </div>
             </div>
 
-            <div className="divider center mb-20 mt-20"></div>
 
 
             <div id='map'></div>
 
-            <div className="map-container" >
-                <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    zoom={13}
-                    center={center}
-                    options={options}
-                >
-                    <Marker position={center} />
 
-                </GoogleMap>
-            </div>
         </div>
     )
 
