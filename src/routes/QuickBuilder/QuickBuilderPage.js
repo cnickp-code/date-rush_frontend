@@ -41,8 +41,11 @@ class QuickBuilderPage extends React.Component {
         if (this.context.step === 'Activity') {
             pageType = (
                 <Spring
-                    from={{ opacity: 0, transform: 'translate3d(100%,0,0)' }}
-                    to={{ opacity: 1, transform: 'translate3d(0%,0,0)' }}
+                    from={{ opacity: 0 }}
+                    to={{ opacity: 1 }}
+                    config={{ delay: 500 }}
+                    // from={{ opacity: 0, transform: 'translate3d(100%,0,0)' }}
+                    // to={{ opacity: 1, transform: 'translate3d(0%,0,0)' }}
                     // config={{ duration: 1000 }}
                 >
                     {props => (
@@ -57,19 +60,50 @@ class QuickBuilderPage extends React.Component {
             )
         } else if (this.context.step === 'Meal') {
             pageType = (
-
-                <MealPage />
+                <Spring
+                from={{ opacity: 0 }}
+                to={{ opacity: 1 }}
+                config={{ delay: 500 }}
+                >
+                    {props => (
+                        <div style={props}>
+                            <MealPage />
+                        </div>
+                        
+                    )}
+                </Spring>
             )
         } else if (this.context.step === 'Drink') {
             pageType = (
 
-                <DrinksPage />
+                <Spring
+                from={{ opacity: 0 }}
+                to={{ opacity: 1 }}
+                config={{ delay: 500 }}
+                >
+                    {props => (
+                        <div style={props}>
+                            <DrinksPage />
+                        </div>
+                        
+                    )}
+                </Spring>
 
             )
         } else if (this.context.step === 'Movie') {
             pageType = (
-
-                <MoviesPage handleForward={this.handleForward} />
+                <Spring
+                from={{ opacity: 0 }}
+                to={{ opacity: 1 }}
+                config={{ delay: 500 }}
+                >
+                    {props => (
+                        <div style={props}>
+                            <MoviesPage handleForward={this.handleForward} />
+                        </div>
+                    )}
+                </Spring>
+                
 
             )
         }

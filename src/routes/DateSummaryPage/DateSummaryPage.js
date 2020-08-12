@@ -150,7 +150,7 @@ class DateSummaryPage extends React.Component {
         return (
             <main>
                 <Header />
-                <Nav />
+                {/* <Nav /> */}
                 <section>
                     <h2 className="text-center mb-10 mt-10">Summary</h2>
                     <div className="add-button-container mt-20 mb-20">

@@ -8,6 +8,7 @@ import CategorySelect from '../../components/CategorySelect/CategorySelect';
 import ExtApiService from '../../services/external-api-service';
 import DRContext from '../../context/DRContext';
 import RestaurantItem from '../../components/RestaurantItem/RestaurantItem';
+import { Spring } from 'react-spring/renderprops';
 
 class MealPage extends React.Component {
     static contextType = DRContext;
@@ -29,7 +30,7 @@ class MealPage extends React.Component {
 
     handleSetCategory = (category) => {
         console.log(category)
-        if(category === 'In') {
+        if (category === 'In') {
             this.setState({
                 in: true,
                 out: false,
@@ -51,14 +52,14 @@ class MealPage extends React.Component {
     }
 
     handleRandomMeal = () => {
-        if(this.state.in) {
+        if (this.state.in) {
             ExtApiService.getMeal()
-            .then(meal => {
-                this.setState({
-                    loading: false,
-                    meal
+                .then(meal => {
+                    this.setState({
+                        loading: false,
+                        meal
+                    })
                 })
-            })
         } else {
             const randIndex = Math.floor(Math.random() * Math.floor(this.state.restaurants.length - 1));
             const restaurant = this.state.restaurants[randIndex].restaurant;
@@ -72,12 +73,12 @@ class MealPage extends React.Component {
 
     handleAddMeal = () => {
         let mealObj;
-        if(this.state.in) {
+        if (this.state.in) {
             mealObj = {
                 id: this.state.meal.meals[0].idMeal,
                 type: 'In',
             }
-            this.context.handleSetDateMeal(mealObj); 
+            this.context.handleSetDateMeal(mealObj);
         } else {
             mealObj = {
                 id: this.state.restaurant.id,
@@ -91,7 +92,7 @@ class MealPage extends React.Component {
         // this.setState({
         //     forward: true
         // })
-         
+
     }
 
 
@@ -110,10 +111,10 @@ class MealPage extends React.Component {
             })
 
         let i = 0;
-        while(i <= 5) {
+        while (i <= 5) {
             ExtApiService.getRestaurantsByLocation(this.context.latLong.lat, this.context.latLong.lng, i, 2000)
                 .then(results => {
-                    if(this.state.restaurants.length > 0) {
+                    if (this.state.restaurants.length > 0) {
                         this.setState({
                             restaurants: [...this.state.restaurants, ...results.restaurants]
                         })
@@ -136,18 +137,18 @@ class MealPage extends React.Component {
             return <Redirect to='/'></Redirect>
         }
 
-        if(this.state.forward) {
+        if (this.state.forward) {
             return <Redirect to='/qb-drinks'></Redirect>
         }
 
         console.log(this.state.meal);
         console.log(this.state.restaurants);
-        
+
 
         return (
             <>
                 <section>
-                    <h2 className="page-header text-center mb-10 mt-10">STEP 2 / What to Eat?</h2>
+                    <h2 className="summary-title center text-center mb-10 mt-10">STEP 2 / What to Eat?</h2>
 
                     <div className="page-location-container center">
                         <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
@@ -164,28 +165,54 @@ class MealPage extends React.Component {
                         onClick={this.handleNext}>Next {">>"}</button> */}
 
                         <button
-                        className="prev-next-button pad-5 item-btn"
-                        onClick={this.handleRandomMeal}
+                            className="prev-next-button pad-5 item-btn"
+                            onClick={this.handleRandomMeal}
                         >Next</button>
-                    </div> }
+                    </div>}
                 </section>
 
                 <section>
-                    {!this.state.loading && this.state.in && <MealItem meal={this.state.meal.meals[0]} />}
+                    {!this.state.loading && this.state.in &&
+                        <Spring
+                            from={{ opacity: 0 }}
+                            to={{ opacity: 1 }}
+                            config={{ delay: 500 }}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <MealItem meal={this.state.meal.meals[0]} />
+                                </div>
+                            )}
+                        </Spring>
 
-                    {!this.state.loading && this.state.out && <RestaurantItem restaurant={this.state.restaurant} />}
+                    }
+
+                    {!this.state.loading && this.state.out &&
+                        <Spring
+                            from={{ opacity: 0 }}
+                            to={{ opacity: 1 }}
+                            config={{ delay: 500 }}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <RestaurantItem restaurant={this.state.restaurant} />
+
+                                </div>
+                            )}
+                        </Spring>
+                    }
 
                     {this.state.catPicked && <div className="add-button-container mt-20 mb-20">
-                        <button 
-                        className="add-button pad-5 center item-btn"
-                        onClick={this.handleAddMeal}
+                        <button
+                            className="add-button pad-5 center item-btn"
+                            onClick={this.handleAddMeal}
                         >Add To Date</button>
-                    </div> }
+                    </div>}
 
                     {/* <QuickBuildTracker /> */}
                 </section>
 
-                
+
             </>
         )
     }

@@ -8,6 +8,7 @@ import DRContext from '../../context/DRContext';
 import ExtApiService from '../../services/external-api-service';
 import { Redirect } from 'react-router-dom';
 import SetNameOverlay from '../../components/SetNameOverlay/SetNameOverlay';
+import { Spring } from 'react-spring/renderprops'
 
 class MoviesPage extends React.Component {
     static contextType = DRContext;
@@ -123,7 +124,7 @@ class MoviesPage extends React.Component {
                 {/* {this.context.nameOverlayShow && <SetNameOverlay handleForward={this.props.handleForward} />} */}
 
                 <section>
-                    <h2 className="page-header text-center mb-10 mt-10">STEP 4 / What to Watch?</h2>
+                    <h2 className="summary-title center text-center mb-10 mt-10">STEP 4 / What to Watch?</h2>
 
                     <div className="page-location-container center">
                         <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
@@ -146,7 +147,20 @@ class MoviesPage extends React.Component {
                 </section>
 
                 <section>
-                    {this.state.showBool && <MovieItem movieBool={this.state.movie} show={this.state.mainShow} />}
+                    {this.state.showBool &&
+                        <Spring
+                            from={{ opacity: 0 }}
+                            to={{ opacity: 1 }}
+                            config={{ delay: 500 }}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <MovieItem movieBool={this.state.movie} show={this.state.mainShow} />
+                                </div>
+
+                            )}
+                        </Spring>
+                    }
 
                     {this.state.showBool && <div className="add-button-container mt-20 mb-20">
                         <button

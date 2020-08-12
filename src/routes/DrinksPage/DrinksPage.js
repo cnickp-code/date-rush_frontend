@@ -7,6 +7,7 @@ import QuickBuildTracker from '../../components/QuickBuildTracker/QuickBuildTrac
 import CategorySelect from '../../components/CategorySelect/CategorySelect';
 import ExtApiService from '../../services/external-api-service';
 import DRContext from '../../context/DRContext';
+import { Spring } from 'react-spring/renderprops';
 
 class DrinksPage extends React.Component {
     static contextType = DRContext;
@@ -24,7 +25,7 @@ class DrinksPage extends React.Component {
     }
 
     handleSetCategory = (category) => {
-        if(category === 'Alcoholic') {
+        if (category === 'Alcoholic') {
             // let alcDrinks = this.state.alcDrinks;
             // let randIndex = Math.floor(Math.random() * Math.floor(alcDrinks.length-1));
             // let drink = alcDrinks[randIndex];
@@ -40,15 +41,15 @@ class DrinksPage extends React.Component {
             //     })
 
             ExtApiService.getAlcDrinks()
-            .then(drinks => {
-                this.setState({
-                    drink: drinks.drinks[0],
-                    category
+                .then(drinks => {
+                    this.setState({
+                        drink: drinks.drinks[0],
+                        category
+                    })
                 })
-            })
         } else {
             let nonAlcDrinks = this.state.nonAlcDrinks;
-            let randIndex = Math.floor(Math.random() * Math.floor(nonAlcDrinks.length-1));
+            let randIndex = Math.floor(Math.random() * Math.floor(nonAlcDrinks.length - 1));
             let drink = nonAlcDrinks[randIndex];
 
             ExtApiService.getDrinkById(drink.idDrink)
@@ -66,27 +67,27 @@ class DrinksPage extends React.Component {
         console.log('handleRandomDrink reached');
 
         ExtApiService.getAlcDrinks()
-        .then(drinks => {
-            console.log(drinks);
-            this.setState({
-                drink: drinks.drinks[0]
+            .then(drinks => {
+                console.log(drinks);
+                this.setState({
+                    drink: drinks.drinks[0]
+                })
             })
-        })
 
         // if(this.state.category === 'Alcoholic') {
-            // let alcDrinks = this.state.alcDrinks;
-            // let randIndex = Math.floor(Math.random() * Math.floor(alcDrinks.length-1));
-            // let drink = alcDrinks[randIndex];
-            // console.log(randIndex);
+        // let alcDrinks = this.state.alcDrinks;
+        // let randIndex = Math.floor(Math.random() * Math.floor(alcDrinks.length-1));
+        // let drink = alcDrinks[randIndex];
+        // console.log(randIndex);
 
-            // ExtApiService.getDrinkById(drink.idDrink)
-            //     .then(drinks => {
-            //         let drink = drinks.drinks[0];
-            //         console.log(drinks)
-            //         this.setState({
-            //             drink
-            //         })
-            //     })
+        // ExtApiService.getDrinkById(drink.idDrink)
+        //     .then(drinks => {
+        //         let drink = drinks.drinks[0];
+        //         console.log(drinks)
+        //         this.setState({
+        //             drink
+        //         })
+        //     })
         //     ExtApiService.getAlcDrinks()
         //     .then(drinks => {
         //         this.setState({
@@ -126,7 +127,7 @@ class DrinksPage extends React.Component {
                     drink: drinks.drinks[0]
                 })
             })
-        
+
         // ExtApiService.getNonAlcDrinks()
         //     .then(drinks => {
         //         this.setState({
@@ -145,19 +146,19 @@ class DrinksPage extends React.Component {
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
             return <Redirect to='/home'></Redirect>
         }
-        if(this.state.forward) {
+        if (this.state.forward) {
             return <Redirect to='/qb-movies'></Redirect>
         }
 
         return (
             <>
                 <section>
-                    <h2 className="page-header text-center mb-10 mt-10">STEP 3 / What to Drink?</h2>
+                    <h2 className="summary-title center text-center mb-10 mt-10">STEP 3 / What to Drink?</h2>
 
                     <div className="page-location-container center">
                         <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
                     </div>
-                    
+
                     {/* <CategorySelect onCategorySelect={this.handleSetCategory} categories={categoryArray}/> */}
 
                     {!this.state.loading && <div className="button-container">
@@ -171,12 +172,26 @@ class DrinksPage extends React.Component {
                 </section>
 
                 <section>
-                    {!this.state.loading && <DrinkItem drink={this.state.drink} />}
+                    {!this.state.loading &&
+                        <Spring
+                            from={{ opacity: 0 }}
+                            to={{ opacity: 1 }}
+                            config={{ delay: 500 }}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <DrinkItem drink={this.state.drink} />
+                                </div>
+
+                            )}
+                        </Spring>
+
+                    }
 
                     {!this.state.loading && <div className="add-button-container mt-20 mb-20">
-                        <button 
-                        className="add-button pad-5 center item-btn"
-                        onClick={this.handleAddDrink}
+                        <button
+                            className="add-button pad-5 center item-btn"
+                            onClick={this.handleAddDrink}
                         >Add To Date</button>
                     </div>}
 

@@ -64,7 +64,7 @@ class ActivityPage extends React.Component {
             //     <Nav />
             <>
                 <section>
-                    <h2 className="page-header text-center mb-10 mt-10">STEP 1 / What to do?</h2>
+                    <h2 className="summary-title center text-center mb-10 mt-10">STEP 1 / What to do?</h2>
 
                     <div className="page-location-container center">
                         <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>

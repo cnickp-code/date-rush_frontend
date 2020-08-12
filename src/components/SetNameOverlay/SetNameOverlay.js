@@ -27,10 +27,17 @@ class SetNameOverlay extends React.Component {
             })
     }
 
+    handleHideOverlay = () => {
+        this.context.handleShowNameOverlay(false);
+    }
+
     render() {
         return (
-            <div className="loader-overlay">
+            <div className="loader-overlay" >
                 <div className="name-form-container">
+                    <div className="overlay-exit" onClick={this.handleHideOverlay}>
+                        <i class="far fa-times-circle"></i>
+                    </div>
                     <form id="name-submit" onSubmit={this.handleNameSubmit}>
                         <h1>Name of Date</h1>
                         <input id="name" type="text" className="text-input center" placeholder="Enter name here." />

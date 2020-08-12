@@ -36,10 +36,16 @@ class MovieItem extends React.Component {
         genres = genres.join(', ');
         console.log(this.props.show);
         console.log(genres);
+        
+        let title = this.props.show.title;
+
+        if(!this.props.show.title){
+            title = this.props.show.name;
+        }
 
         return (
             <div className="main-container">
-                <h3 className="text-center mb-10">{this.props.show.title}</h3>
+                <h3 className="text-center mb-10">{title}</h3>
                 <div className="flex-container">
                     <div className="left-container">
                         <p className="text-center">

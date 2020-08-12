@@ -992,16 +992,26 @@ text-decoration: underline;
   padding: 20px;
   border-radius: 15px;
   overflow: hidden;
+  z-index: 35000;
 }
 
 .name-form-container h1 {
   font-family: var(--font-family-head);
   text-align: center;
   margin-bottom: 20px;
+  z-index: 35000;
 }
 
 .name-form-container input::placeholder {
   color: #f7f7f7;
+}
+
+.overlay-exit {
+  position: absolute;
+  left: 87%;
+  top: 3%;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .item-btn2 {

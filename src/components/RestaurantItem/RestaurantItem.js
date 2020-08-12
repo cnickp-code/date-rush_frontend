@@ -11,7 +11,7 @@ class RestaurantItem extends React.Component {
     render() {
         let restaurantMain = this.props.restaurant;
         let featuredImg = restaurantMain.featured_image;
-        let avgCost = <p className="text-center">Avg Cost for Two: {'$'}{restaurantMain.average_cost_for_two}</p>
+        let avgCost = <p className="text-center">Avg Cost for Two: Not Available</p>
         let ratingEl = <p className="text-center"> Rating: Not Available</p>
 
         if (restaurantMain.featured_image === '' || restaurantMain.featured_image === null) {
