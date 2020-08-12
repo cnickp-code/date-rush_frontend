@@ -20,7 +20,8 @@ class DrinksPage extends React.Component {
             alcDrinks: [],
             nonAlcDrinks: [],
             drink: null,
-            category: null
+            category: null,
+            showBool: true,
         }
     }
 
@@ -63,6 +64,12 @@ class DrinksPage extends React.Component {
         }
     }
 
+    handleToggleShow = () => {
+        this.setState({
+            showBool: false,
+        })
+    }
+
     handleRandomDrink = () => {
         console.log('handleRandomDrink reached');
 
@@ -70,6 +77,7 @@ class DrinksPage extends React.Component {
             .then(drinks => {
                 console.log(drinks);
                 this.setState({
+                    showBool: true,
                     drink: drinks.drinks[0]
                 })
             })
@@ -143,6 +151,8 @@ class DrinksPage extends React.Component {
         console.log(this.state.nonAlcDrinks);
         console.log(this.state.drink);
 
+        let { showBool } = this.state;
+
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
             return <Redirect to='/home'></Redirect>
         }
@@ -166,17 +176,34 @@ class DrinksPage extends React.Component {
                         <button className="prev-next-button pad-5">Next {">>"}</button> */}
                         <button
                             className="prev-next-button pad-5 item-btn"
-                            onClick={this.handleRandomDrink}
+                            onClick={this.handleToggleShow}
                         ><i class="fas fa-dice "></i></button>
                     </div>}
                 </section>
 
                 <section>
-                    {!this.state.loading &&
+                    {!this.state.loading && showBool &&
                         <Spring
-                            from={{ opacity: 0 }}
-                            to={{ opacity: 1 }}
-                            config={{ delay: 500 }}
+                            from={{ transform: 'translate3d(-100%, 0, 0)' }}
+                            to={{ transform: 'translate3d(0%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <DrinkItem drink={this.state.drink} />
+                                </div>
+
+                            )}
+                        </Spring>
+
+                    }
+
+                    {!this.state.loading && !showBool &&
+                        <Spring
+                            from={{ transform: 'translate3d(0%, 0, 0)' }}
+                            to={{ transform: 'translate3d(100%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                            onRest={this.handleRandomDrink}
                         >
                             {props => (
                                 <div style={props}>

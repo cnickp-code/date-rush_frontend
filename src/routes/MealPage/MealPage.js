@@ -8,7 +8,7 @@ import CategorySelect from '../../components/CategorySelect/CategorySelect';
 import ExtApiService from '../../services/external-api-service';
 import DRContext from '../../context/DRContext';
 import RestaurantItem from '../../components/RestaurantItem/RestaurantItem';
-import { Spring } from 'react-spring/renderprops';
+import { Spring, Transition } from 'react-spring/renderprops';
 import LoadingOverlay from '../../components/LoadingOverlay/LoadingOverlay';
 
 class MealPage extends React.Component {
@@ -26,6 +26,7 @@ class MealPage extends React.Component {
             out: false,
             restaurants: [],
             restaurant: {},
+            show: true
         }
     }
 
@@ -52,13 +53,20 @@ class MealPage extends React.Component {
         }
     }
 
+    handleToggleShow = () => {
+        this.setState({
+            show: false
+        })
+    }
+
     handleRandomMeal = () => {
         if (this.state.in) {
             ExtApiService.getMeal()
                 .then(meal => {
                     this.setState({
                         loading: false,
-                        meal
+                        meal,
+                        show: true
                     })
                 })
         } else {
@@ -67,6 +75,7 @@ class MealPage extends React.Component {
 
             this.setState({
                 restaurant,
+                show: true
             })
         }
 
@@ -146,6 +155,7 @@ class MealPage extends React.Component {
 
         console.log(this.state.meal);
         console.log(this.state.restaurants);
+        let showBool = this.state.show;
 
 
         return (
@@ -179,17 +189,17 @@ class MealPage extends React.Component {
 
                         <button
                             className="prev-next-button pad-5 item-btn"
-                            onClick={this.handleRandomMeal}
+                            onClick={this.handleToggleShow}
                         ><i class="fas fa-dice "></i></button>
                     </div>}
                 </section>
 
                 <section>
-                    {!this.state.loading && this.state.in &&
+                    {!this.state.loading && this.state.in && showBool &&
                         <Spring
-                            from={{ opacity: 0 }}
-                            to={{ opacity: 1 }}
-                            config={{ delay: 500 }}
+                            from={{ transform: 'translate3d(-100%, 0, 0)' }}
+                            to={{ transform: 'translate3d(0%, 0, 0)' }}
+                            config={{ duration: 300 }}
                         >
                             {props => (
                                 <div style={props}>
@@ -197,14 +207,29 @@ class MealPage extends React.Component {
                                 </div>
                             )}
                         </Spring>
-
                     }
 
-                    {!this.state.loading && this.state.out &&
+                    {!this.state.loading && this.state.in && !showBool &&
                         <Spring
-                            from={{ opacity: 0 }}
-                            to={{ opacity: 1 }}
-                            config={{ delay: 500 }}
+                            from={{ transform: 'translate3d(0%, 0, 0)' }}
+                            to={{ transform: 'translate3d(100%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                            onRest={this.handleRandomMeal}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <MealItem meal={this.state.meal.meals[0]} />
+                                </div>
+                            )}
+                        </Spring>
+                    }
+
+
+                    {!this.state.loading && this.state.out && showBool &&
+                        <Spring
+                            from={{ transform: 'translate3d(-100%, 0, 0)' }}
+                            to={{ transform: 'translate3d(0%, 0, 0)' }}
+                            config={{ duration: 300 }}
                         >
                             {props => (
                                 <div style={props}>
@@ -214,6 +239,37 @@ class MealPage extends React.Component {
                             )}
                         </Spring>
                     }
+
+                    {!this.state.loading && this.state.out && !showBool &&
+                        <Spring
+                            from={{ transform: 'translate3d(0%, 0, 0)' }}
+                            to={{ transform: 'translate3d(100%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                            onRest={this.handleRandomMeal}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <RestaurantItem restaurant={this.state.restaurant} />
+
+                                </div>
+                            )}
+                        </Spring>
+                    }
+
+                    {/* {!this.state.loading && this.state.out && !this.state.show &&
+                        <Spring
+                            from={{ transform: 'translate3d(0%, 0, 0)' }}
+                            to={{ transform: 'translate3d(100%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                            onRest={this.handleRandomMeal}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <RestaurantItem restaurant={this.state.restaurant} />
+                                </div>
+                            )}
+                        </Spring>
+                    } */}
 
                     {this.state.catPicked && <div className="add-button-container mt-20 mb-20">
                         <button

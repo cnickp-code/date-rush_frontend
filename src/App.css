@@ -362,6 +362,7 @@ text-decoration: underline;
 .landing-link {
   color: var(--color-secondary-2-4);
   text-decoration: underline;
+  cursor: pointer;
 }
 
 @keyframes move-pointer {
@@ -1062,6 +1063,19 @@ text-decoration: underline;
 
 .name-form-container input::placeholder {
   color: var(--font-color-p-dark);
+}
+
+.load-container {
+
+}
+
+.checkmark {
+  background-image: url('/src/checkmark.gif');
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: calc(50% - 50px);
+  top: calc(50% - 50px);
 }
 
 .overlay-exit {

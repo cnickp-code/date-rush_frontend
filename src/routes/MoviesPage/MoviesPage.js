@@ -22,6 +22,7 @@ class MoviesPage extends React.Component {
             movie: false,
             tv: false,
             showBool: false,
+            displayBool: true,
             mainShow: {},
         }
     }
@@ -60,6 +61,12 @@ class MoviesPage extends React.Component {
         }
     }
 
+    handleToggleDisplay = () => {
+        this.setState({
+            displayBool: false
+        })
+    }
+
     handleRandom = () => {
         let start = Math.floor(Math.random() * Math.floor(500));
         let randIndex = Math.floor(Math.random() * Math.floor(20));
@@ -69,6 +76,7 @@ class MoviesPage extends React.Component {
                 .then(movies => {
                     const randMovie = movies.results[randIndex];
                     this.setState({
+                        displayBool: true,
                         mainShow: randMovie
                     })
                 })
@@ -77,6 +85,7 @@ class MoviesPage extends React.Component {
                 .then(shows => {
                     const randShow = shows.results[randIndex];
                     this.setState({
+                        displayBool: true,
                         mainShow: randShow
                     })
                 })
@@ -110,6 +119,7 @@ class MoviesPage extends React.Component {
 
     render() {
         let categoryArray = ['Movie', 'TV'];
+        let { displayBool } = this.state;
         console.log(this.state.mainShow);
 
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
@@ -151,17 +161,33 @@ class MoviesPage extends React.Component {
                     {this.state.showBool && <div className="button-container">
                         <button
                             className="prev-next-button pad-5 item-btn"
-                            onClick={this.handleRandom}
+                            onClick={this.handleToggleDisplay}
                         ><i class="fas fa-dice "></i></button>
                     </div>}
                 </section>
 
                 <section>
-                    {this.state.showBool &&
+                    {this.state.showBool && displayBool &&
                         <Spring
-                            from={{ opacity: 0 }}
-                            to={{ opacity: 1 }}
-                            config={{ delay: 500 }}
+                            from={{ transform: 'translate3d(-100%, 0, 0)' }}
+                            to={{ transform: 'translate3d(0%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <MovieItem movieBool={this.state.movie} show={this.state.mainShow} />
+                                </div>
+
+                            )}
+                        </Spring>
+                    }
+
+                    {this.state.showBool && !displayBool &&
+                        <Spring
+                            from={{ transform: 'translate3d(-0%, 0, 0)' }}
+                            to={{ transform: 'translate3d(100%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                            onRest={this.handleRandom}
                         >
                             {props => (
                                 <div style={props}>

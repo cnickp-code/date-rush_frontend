@@ -5,6 +5,7 @@ import ActivityItem from '../../components/ActivityItem/ActivityItem';
 import QuickBuildTracker from '../../components/QuickBuildTracker/QuickBuildTracker';
 import { Redirect } from 'react-router-dom';
 import DRContext from '../../context/DRContext';
+import { Spring } from 'react-spring/renderprops'
 
 class ActivityPage extends React.Component {
     static contextType = DRContext;
@@ -15,6 +16,7 @@ class ActivityPage extends React.Component {
             forward: false,
             loading: true,
             activity: null,
+            show: true
         }
     }
 
@@ -24,6 +26,7 @@ class ActivityPage extends React.Component {
         const activity = this.context.places[randIndex];
 
         this.setState({
+            show: true,
             loading: false,
             activity
         })
@@ -35,6 +38,12 @@ class ActivityPage extends React.Component {
         // this.setState({
         //     forward: true
         // })
+    }
+
+    handleToggleShow = () => {
+        this.setState({
+            show: false
+        })
     }
 
     componentDidMount() {
@@ -72,16 +81,44 @@ class ActivityPage extends React.Component {
                     <div className="button-container">
                         <button
                             className="prev-next-button pad-5 item-btn"
-                            onClick={this.handleRandomActivity}
+                            onClick={this.handleToggleShow}
                         ><i class="fas fa-dice "></i></button>
                     </div>
                 </section>
 
                 <section>
-                    {!this.state.loading && 
+                    {!this.state.loading && this.state.show &&
+                        <Spring
+                            from={{ transform: 'translate3d(-100%, 0, 0)' }}
+                            to={{ transform: 'translate3d(0%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <ActivityItem activity={this.state.activity} />
+                                </div>
 
-                    <ActivityItem activity={this.state.activity} />
-                    
+
+                            )}
+                        </Spring>
+                    }
+
+                    {!this.state.loading && !this.state.show &&
+                        <Spring
+                            from={{ transform: 'translate3d(0%, 0, 0)' }}
+                            to={{ transform: 'translate3d(100%, 0, 0)' }}
+                            config={{ duration: 300 }}
+                            onRest={this.handleRandomActivity}
+                        >
+                            {props => (
+                                <div style={props}>
+                                    <ActivityItem activity={this.state.activity} />
+                                </div>
+
+
+                            )}
+                        </Spring>
+
                     }
 
                     <div className="add-button-container mt-20 mb-20">

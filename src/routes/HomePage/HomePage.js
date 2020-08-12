@@ -6,6 +6,7 @@ import LoadingOverlay from '../../components/LoadingOverlay/LoadingOverlay';
 import DRContext from '../../context/DRContext';
 import SetNameOverlay from '../../components/SetNameOverlay/SetNameOverlay';
 import { Spring, Keyframes, config } from 'react-spring/renderprops';
+import ConfirmationOverlay from '../../components/ConfirmationOverlay/ConfirmationOverlay';
 
 // const Content = Keyframes.Spring(async next => {
 //     let i = 0;
@@ -31,6 +32,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <main>
+                {/* <ConfirmationOverlay /> */}
                 {this.context.loading && <LoadingOverlay />}
                 {this.context.nameOverlayShow && <SetNameOverlay />}
                 <Header />

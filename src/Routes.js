@@ -21,7 +21,7 @@ class Routes extends React.Component {
     render() {
         return (
             <Switch>
-                <Route
+                <PublicRoute
                     exact path='/'
                     component={LandingPage}
                 />
