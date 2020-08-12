@@ -25,7 +25,7 @@ class ProfileDateItem extends React.Component {
                     </div>
                     <div className="prof-button-container">
                         <div className="trash-button" onClick={this.handleDeleteItem}>
-                            <i className="fs-xl fas fa-trash-alt"></i>
+                            <i className="fs-xl fas fa-trash-alt trash"></i>
                         </div>
                     </div>
                 </div>

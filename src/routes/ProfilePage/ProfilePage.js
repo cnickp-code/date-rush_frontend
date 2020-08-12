@@ -6,6 +6,7 @@ import DRContext from '../../context/DRContext';
 import ProfileDateItem from '../../components/ProfileDateItem/ProfileDateItem';
 import { Redirect } from 'react-router-dom';
 import DateRushApiService from '../../services/dr-api-service';
+import { Transition } from 'react-spring/renderprops';
 
 class ProfilePage extends React.Component {
     static contextType = DRContext;
@@ -50,7 +51,17 @@ class ProfilePage extends React.Component {
                 {/* <Nav /> */}
                 <section>
                     <h2 className="text-center mb-10 mt-10 prof-page-title">My Dates</h2>
-                    {profileDates}
+                    {/* {profileDates} */}
+
+                    <Transition
+                        items={profileDates} keys={item => item.key}
+                        from={{ opacity: 0, transform: 'translate3d(0, 300%, 0)' }}
+                        enter={{ opacity: 1, transform: 'translate3d(0, 0px, 0)' }}
+                        leave={{ opacity: 0, transform: 'translate3d(0, 100%, 0)' }}
+                        trail={150}
+                    >
+                        {item => props => <div style={props}>{item}</div>}
+                    </Transition>
 
                 </section>
 

@@ -755,11 +755,13 @@ text-decoration: underline;
   padding-bottom: 10px;
   border-top: 1px solid var(--color-secondary-2-4);
   border-bottom: 1px solid var(--color-secondary-2-4);
+  
 }
 
 .prof-title-container {
   width: 85%;
   border-right: 1px solid var(--color-secondary-2-4);
+  cursor: pointer;
 }
 
 .prof-button-container {
@@ -768,6 +770,10 @@ text-decoration: underline;
   flex-direction: row;
   justify-content: space-evenly;
   /* padding-right: 10px; */
+}
+
+.trash {
+  cursor: pointer;
 }
 
 .profile-date-container {

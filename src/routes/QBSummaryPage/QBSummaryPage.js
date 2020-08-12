@@ -34,7 +34,7 @@ const QBSummaryPage = () => {
                 <h2 className="text-center mb-10 mt-10 summary-title center">{summaryDate.name}</h2>
 
                 <div className="page-location-container center">
-                    <p className="text-center"><i class="fas fa-map-marked-alt"></i> Date Location: {summaryDate.location}</p>
+                    <p className="text-center"><i class="fas fa-map-marked-alt"></i> {' '} {summaryDate.location}</p>
                 </div>
                 <div className="add-button-container mt-20 mb-20">
                     <Link to="/profile">

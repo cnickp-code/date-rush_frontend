@@ -154,7 +154,7 @@ class MealPage extends React.Component {
                     <h2 className="summary-title center text-center mb-10 mt-10">STEP 2 / What to Eat?</h2>
 
                     <div className="page-location-container center">
-                        <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
+                        <p className="text-center"><i class="fas fa-map-marked-alt"></i> {' '} {this.context.location}</p>
                     </div>
                     <Spring
                         from={{ opacity: 0 }}
