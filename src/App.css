@@ -391,17 +391,21 @@ text-decoration: underline;
   font-size: 18px;
   border-radius: 10px;
   border: none;
+  opacity: 0.8;
   border-bottom: 2px solid white;
-  background-color: var(--color-secondary-2-4);
-  color: #f7f7f7;
+  /* background-color: var(--color-secondary-2-4); */
+  color: var(--font-color-p-dark);
   outline: none;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  left: -10%;
+  width: 120%;
 }
 
 .search::placeholder {
   opacity: 0.8;
-  color: #f7f7f7
+  color: var(--font-color-p-dark)
 }
 
 #map {
@@ -413,10 +417,6 @@ text-decoration: underline;
   font-size: 30px;
   /* border-bottom: 1px solid var(--color-secondary-2-2); */
   margin-bottom: 20px;
-}
-
-.form-container {
-  background-color: var(--color-secondary-2-4);
 }
 
 /* LOADER STYLES */
@@ -447,13 +447,42 @@ text-decoration: underline;
 
 /* HOME STYLE */
 
+.item-btn3 {
+  margin-top: 20px;
+  padding:0.5em 3em;
+  border:0.16em solid var(--color-secondary-2-4);
+  margin:0 0.3em 0.3em 0;
+  box-sizing: border-box;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-family:'Roboto',sans-serif;
+  font-weight:400;
+  color:#FFFFFF;
+  text-align:center;
+  transition: all 0.15s;
+  background-color: transparent;
+  outline: none;
+}
+
+.item-btn3:hover {
+  color:#DDDDDD;
+  border-color:#DDDDDD;
+}
+
+.item-btn3:active {
+  color:#BBBBBB;
+  border-color:#BBBBBB;
+}
+
 .home-top-wrapper {
   padding: 20px;
-  height: 300px;
+  padding-top: 10px;
+  height: 350px;
   background-image: url('./rose-2946990_1920.jpg');
   /* background-image: url('https://upgradedpoints.com/wp-content/uploads/2020/02/couple-on-a-date.jpg'); */
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: 50% 80%;
 }
 
 .home-mid-wrapper {
@@ -462,9 +491,10 @@ text-decoration: underline;
 
 .home-container {
   font-family: var(--font-family-head);
-  width: 75%;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 40px;
   color: #d9d9d9;
   text-align: center;
   font-size: 24px;
@@ -478,6 +508,7 @@ text-decoration: underline;
 .location-container {
   font-family: var(--font-family-head);
   width: 75%;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
   color: #d9d9d9;
@@ -498,11 +529,11 @@ text-decoration: underline;
 
 .form-container {
   max-width: 500px;
-  border: 1px solid #A51E4B;
+  /* border: 1px solid #A51E4B; */
   border-radius: 20px;
   padding: 10px;
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 10px;
   box-shadow: 4px 4px 14px 0px rgba(0,0,0,0.75);
 }
 
@@ -511,12 +542,30 @@ text-decoration: underline;
 }
 
 .location-button {
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7;
   color: var(--color-secondary-2-4);
   border: 1px solid var(--color-secondary-2-4);
   margin-top: 20px;
   width: 100px;
-  border-radius: 10px;
+  border-radius: 10px; */
+
+  padding:0.35em 1.2em;
+  border:0.1em solid var(--color-secondary-2-4);
+  margin:0.4em 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:var(--color-secondary-2-4);
+  text-align:center;
+  transition: all 0.2s;
+}
+
+.location-button:hover {
+  color: var(--color-secondary-2-4);
+  background-color: #f7f7f7;
+  cursor: pointer;
 }
 
 .home-step-card {
@@ -571,6 +620,8 @@ text-decoration: underline;
   border: 1px solid var(--color-secondary-2-4);
   background-color: #f7f7f7;
   color: var(--color-secondary-2-4);
+  cursor: pointer;
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
 }
 
 /* ACTIVITY STYLES */
@@ -989,7 +1040,7 @@ text-decoration: underline;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-secondary-2-4);
+  background-color: transparent;
   color: #f7f7f7;
   position: absolute;
   left: calc(50% - 150px);
@@ -1010,7 +1061,7 @@ text-decoration: underline;
 }
 
 .name-form-container input::placeholder {
-  color: #f7f7f7;
+  color: var(--font-color-p-dark);
 }
 
 .overlay-exit {
@@ -1040,6 +1091,13 @@ text-decoration: underline;
     background-position: 50% 80%;
   }
 
+  .location-container {
+    position: relative;
+    right: 21%;
+    top: 10%;
+    width: 350px;
+  }
+
   .landing-container {
     left: 35%;
   }
@@ -1050,7 +1108,7 @@ text-decoration: underline;
 
   .home-container {
     position: relative;
-    top: 20%;
+    top: 5%;
     left: 10%;
     text-align: left;
     margin: 0 0;
@@ -1120,6 +1178,16 @@ text-decoration: underline;
 
   .home-img-container {
     left: 41%;
+  }
+
+  .home-container {
+    top: 10%;
+  }
+
+  .location-container {
+    right: 27%;
+    top: 25%;
+    width: 450px;
   }
 }
 

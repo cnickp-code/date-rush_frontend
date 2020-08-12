@@ -196,7 +196,7 @@ const LocationForm = () => {
                                 setValue(e.target.value)
                             }}
                             disabled={!ready}
-                            placeholder='Enter a city or address'
+                            placeholder='Enter a city'
                             className='search'
                         />
                         <ComboboxPopover>
@@ -205,7 +205,7 @@ const LocationForm = () => {
                     </Combobox>
                 </div>
 
-                <button type="submit" className="location-button pad-5">Start</button>
+                <button type="submit" className="item-btn mt-10 pad-5">Start</button>
 
 
             </form>

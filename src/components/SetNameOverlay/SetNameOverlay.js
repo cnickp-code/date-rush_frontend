@@ -1,6 +1,7 @@
 import React from 'react';
 import DRContext from '../../context/DRContext';
 import DateRushApiService from '../../services/dr-api-service';
+import { Spring } from 'react-spring/renderprops';
 
 class SetNameOverlay extends React.Component {
     static contextType = DRContext;
@@ -35,19 +36,28 @@ class SetNameOverlay extends React.Component {
     render() {
         return (
             <div className="loader-overlay" >
-                <div className="name-form-container">
-                    <div className="overlay-exit" onClick={this.handleHideOverlay}>
-                        <i class="far fa-times-circle"></i>
-                    </div>
-                    <form id="name-submit" onSubmit={this.handleNameSubmit}>
-                        <h1>Name of Date</h1>
-                        <input id="name" type="text" className="text-input center" placeholder="Enter name here." />
-                        <div className="button-container">
-                            <button type="submit" className="item-btn2">Save</button>
-                        </div>
-                    </form>
-                </div>
+                <Spring
+                    from={{ opacity: 0, transform: 'translate3d(0, 300%, 0)'  }}
+                    to={{ opacity: 1, transform: 'translate3d(0, -10%, 0)' }}
+                    config={{ duration: 1000 }}
+                >
+                    {props => (
 
+                        <div style={props} className="name-form-container">
+                            <div className="overlay-exit" onClick={this.handleHideOverlay}>
+                                <i class="far fa-times-circle"></i>
+                            </div>
+                            <form id="name-submit" onSubmit={this.handleNameSubmit}>
+                                <h1>Name of Date</h1>
+                                <input id="name" type="text" className="search center" placeholder="Enter name here." />
+                                <div className="button-container">
+                                    <button type="submit" className="item-btn">Save</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    )}
+                </Spring>
             </div>
         )
     }
