@@ -34,7 +34,7 @@ class Signup extends React.Component {
         user_name.value = '';
         password.value = '';
         email.value = '';
-        repeat_password.value='';
+        repeat_password.value = '';
         // this.props.onRegistrationSuccess();
         this.props.toggleIntro();
       })
@@ -153,78 +153,160 @@ class Signup extends React.Component {
   render() {
     const { error, userNameError, emailError, passwordError, repeatPasswordError } = this.state;
     return (
-      <Spring
-        from={{ opacity: 0 }}
-        to={{ opacity: 1 }}
-      >
-        {props => (
-          <div style={props} className="form-box-ls center">
-            <form className="main-form" onSubmit={this.handleRegistrationSubmit}>
-              <div role='alert'>
-                {error && <p className='error center'>{error}</p>}
-              </div>
-              <h1>Sign up</h1>
-              <fieldset name="login-info">
-                <h4>Username</h4>
-                <input
-                  placeholder=""
-                  type="text"
-                  name="user_name"
-                  id="user_name"
-                  className="text-input center"
-                  onChange={this.handleUserNameError}
-                  required
-                />
-                {userNameError && <p className='error center'>{userNameError}</p>}
+      <>
+        {
+          this.props.intro ?
+            (
+              <Spring
+                from={{ opacity: 0 }}
+                to={{ opacity: 1 }}
+                config={{ delay: 2000, duration: 1000 }}
+              >
+                {props => (
+                  <div style={props} className="form-box-ls center">
+                    <form className="main-form" onSubmit={this.handleRegistrationSubmit}>
+                      <div role='alert'>
+                        {error && <p className='error center'>{error}</p>}
+                      </div>
+                      <h1>Sign up</h1>
+                      <fieldset name="login-info">
+                        <h4>Username</h4>
+                        <input
+                          placeholder=""
+                          type="text"
+                          name="user_name"
+                          id="user_name"
+                          className="text-input center"
+                          onChange={this.handleUserNameError}
+                          required
+                        />
+                        {userNameError && <p className='error center'>{userNameError}</p>}
 
-                <h4>Email</h4>
-                <input
-                  placeholder=""
-                  type="text"
-                  name="email"
-                  id="email"
-                  className="text-input center"
-                  onBlur={this.handleEmailError}
-                  required
-                />
-                {emailError && <p className='error center'>{emailError}</p>}
+                        <h4>Email</h4>
+                        <input
+                          placeholder=""
+                          type="text"
+                          name="email"
+                          id="email"
+                          className="text-input center"
+                          onBlur={this.handleEmailError}
+                          required
+                        />
+                        {emailError && <p className='error center'>{emailError}</p>}
 
-                <h4>Password</h4>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder=""
-                  className="text-input center"
-                  onChange={this.handlePasswordError}
-                  ref={this.password}
-                  required
-                />
-                {passwordError && <p className='error center'>{passwordError}</p>}
+                        <h4>Password</h4>
+                        <input
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder=""
+                          className="text-input center"
+                          onChange={this.handlePasswordError}
+                          ref={this.password}
+                          required
+                        />
+                        {passwordError && <p className='error center'>{passwordError}</p>}
 
-                <h4>Repeat Password</h4>
-                <input
-                  type="password"
-                  name="repeat_password"
-                  id="repeat_password"
-                  placeholder=""
-                  className="text-input center"
-                  onBlur={this.handleRepeatPasswordError}
-                  required
-                />
-                {repeatPasswordError && <p className='error center'>{repeatPasswordError}</p>}
+                        <h4>Repeat Password</h4>
+                        <input
+                          type="password"
+                          name="repeat_password"
+                          id="repeat_password"
+                          placeholder=""
+                          className="text-input center"
+                          onBlur={this.handleRepeatPasswordError}
+                          required
+                        />
+                        {repeatPasswordError && <p className='error center'>{repeatPasswordError}</p>}
 
-              </fieldset>
-              <button type="submit" className="form-submit-button">Register</button>
-            </form>
-            <div className="login-box center">
-              <p>Already have an account? {' '}
-                <span className="landing-link" onClick={this.toggleLanding}>Log in!</span>
-              </p>
-            </div>
-          </div>
-        )}
-      </Spring>
+                      </fieldset>
+                      <button type="submit" className="form-submit-button">Register</button>
+                    </form>
+                    <div className="login-box center">
+                      <p>Already have an account? {' '}
+                        <span className="landing-link" onClick={this.toggleLanding}>Log in!</span>
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </Spring>
+            )
+            : (
+              <Spring
+                from={{ opacity: 0 }}
+                to={{ opacity: 1 }}
+              >
+                {props => (
+                  <div style={props} className="form-box-ls center">
+                    <form className="main-form" onSubmit={this.handleRegistrationSubmit}>
+                      <div role='alert'>
+                        {error && <p className='error center'>{error}</p>}
+                      </div>
+                      <h1>Sign up</h1>
+                      <fieldset name="login-info">
+                        <h4>Username</h4>
+                        <input
+                          placeholder=""
+                          type="text"
+                          name="user_name"
+                          id="user_name"
+                          className="text-input center"
+                          onChange={this.handleUserNameError}
+                          required
+                        />
+                        {userNameError && <p className='error center'>{userNameError}</p>}
+
+                        <h4>Email</h4>
+                        <input
+                          placeholder=""
+                          type="text"
+                          name="email"
+                          id="email"
+                          className="text-input center"
+                          onBlur={this.handleEmailError}
+                          required
+                        />
+                        {emailError && <p className='error center'>{emailError}</p>}
+
+                        <h4>Password</h4>
+                        <input
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder=""
+                          className="text-input center"
+                          onChange={this.handlePasswordError}
+                          ref={this.password}
+                          required
+                        />
+                        {passwordError && <p className='error center'>{passwordError}</p>}
+
+                        <h4>Repeat Password</h4>
+                        <input
+                          type="password"
+                          name="repeat_password"
+                          id="repeat_password"
+                          placeholder=""
+                          className="text-input center"
+                          onBlur={this.handleRepeatPasswordError}
+                          required
+                        />
+                        {repeatPasswordError && <p className='error center'>{repeatPasswordError}</p>}
+
+                      </fieldset>
+                      <button type="submit" className="form-submit-button">Register</button>
+                    </form>
+                    <div className="login-box center">
+                      <p>Already have an account? {' '}
+                        <span className="landing-link" onClick={this.toggleLanding}>Log in!</span>
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </Spring>
+
+            )}
+      </>
     )
   }
 }

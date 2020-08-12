@@ -31,9 +31,10 @@ class ActivityPage extends React.Component {
 
     handleAddActivity = () => {
         this.context.handleSetDateActivity(this.state.activity.id);
-        this.setState({
-            forward: true
-        })
+        this.context.handleSetDateStep('Meal');
+        // this.setState({
+        //     forward: true
+        // })
     }
 
     componentDidMount() {
@@ -51,19 +52,23 @@ class ActivityPage extends React.Component {
         if (this.context.places.length < 1 || this.context.location === null || this.context.latLong === null) {
             return <Redirect to='/home'></Redirect>
         }
-        if(this.state.forward) {
-            return <Redirect to='/qb-meals'></Redirect>
-        }
+        // if(this.state.forward) {
+        //     return <Redirect to='/qb-meals'></Redirect>
+        // }
         console.log(this.context.places);
         console.log(this.state.activity);
 
         return (
-            <main>
-                <Header />
-                <Nav />
+            // <main>
+            //     <Header />
+            //     <Nav />
+            <>
                 <section>
-                    <h2 className="text-center mb-10 mt-10">STEP 1 / What to do?</h2>
+                    <h2 className="page-header text-center mb-10 mt-10">STEP 1 / What to do?</h2>
 
+                    <div className="page-location-container center">
+                        <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
+                    </div>
                     <div className="button-container">
                         <button
                             className="prev-next-button pad-5 item-btn"
@@ -73,7 +78,11 @@ class ActivityPage extends React.Component {
                 </section>
 
                 <section>
-                    {!this.state.loading && <ActivityItem activity={this.state.activity} />}
+                    {!this.state.loading && 
+
+                    <ActivityItem activity={this.state.activity} />
+                    
+                    }
 
                     <div className="add-button-container mt-20 mb-20">
                         <button
@@ -84,7 +93,8 @@ class ActivityPage extends React.Component {
 
                     {/* <QuickBuildTracker /> */}
                 </section>
-            </main>
+            </>
+            // </main>
         )
     }
 }

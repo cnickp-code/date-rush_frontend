@@ -27,24 +27,32 @@ class DrinkItem extends React.Component {
         return (
             <div className="main-container">
                 <h3 className="text-center mb-10">{this.props.drink.strDrink}</h3>
-                <p className="text-center">
-                    <img src={this.props.drink.strDrinkThumb} className="preview-image mb-10" />
-                </p>
-                <h4 className="mb-10 mt-10 text-center">{this.props.drink.strAlcoholic}</h4>
-                
-                <div className="divider center mb-20 mt-20"></div>
+                <div className="flex-container">
+                    <div className="left-container">
+                        <p className="text-center">
+                            <img src={this.props.drink.strDrinkThumb} className="preview-image mb-10" />
+                        </p>
+                    </div>
+                    <div className="right-drink-container">
+                        <h4 className="mb-10 mt-10 text-center">{this.props.drink.strAlcoholic}</h4>
 
-                <h4 className="mb-10">Ingredients:</h4>
-                {ingredientArray}
+                        <div className="divider center mb-20 mt-20"></div>
 
-                <div className="divider center mb-20 mt-20"></div>
+                        <h4 className="mb-10">Ingredients:</h4>
+                        {ingredientArray}
 
-                <h4 className="mt-10 mb-10">Instructions:</h4>
-                <p>{this.props.drink.strInstructions}</p>
+                        <div className="divider center mb-20 mt-20"></div>
 
-                <div className="flex-center">
-                    {/* <a href={this.props.drink.strSource} className="recipe-link center" target="_blank">View Recipe</a> */}
+                        <h4 className="mt-10 mb-10">Instructions:</h4>
+                        <p>{this.props.drink.strInstructions}</p>
+
+                        <div className="flex-center">
+                            {/* <a href={this.props.drink.strSource} className="recipe-link center" target="_blank">View Recipe</a> */}
+                        </div>
+                    </div>
                 </div>
+
+
 
             </div>
         )

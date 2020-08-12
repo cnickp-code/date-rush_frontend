@@ -47,7 +47,7 @@ class ProfilePage extends React.Component {
         return (
             <main>
                 <Header />
-                <Nav />
+                {/* <Nav /> */}
                 <section>
                     <h2 className="text-center mb-10 mt-10 prof-page-title">My Dates</h2>
                     {profileDates}

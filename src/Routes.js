@@ -15,6 +15,7 @@ import LandingPage from '../src/routes/LandingPage/LandingPage';
 import PublicRoute from '../src/components/Utils/PublicRoute';
 import PrivateRoute from '../src/components/Utils/PrivateRoute';
 import DateSummaryPage from '../src/routes/DateSummaryPage/DateSummaryPage';
+import QuickBuilder from '../src/routes/QuickBuilder/QuickBuilderPage';
 
 class Routes extends React.Component {
     render() {
@@ -43,6 +44,10 @@ class Routes extends React.Component {
                 <PrivateRoute
                     exact path='/qb-movies'
                     component={MoviesPage}
+                />
+                <PrivateRoute
+                    exact path='/quick-builder'
+                    component={QuickBuilder}
                 />
                 <PrivateRoute
                     exact path='/profile'

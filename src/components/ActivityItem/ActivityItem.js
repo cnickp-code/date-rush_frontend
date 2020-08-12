@@ -27,27 +27,27 @@ const ActivityItem = (props) => {
 
     let stars;
 
-    if(props.activity.rating) {
+    if (props.activity.rating) {
         stars = [];
         let ratingSplit = props.activity.rating.toString().split('.');
         let wholeStars = Number(ratingSplit[0]);
         let decimal = Number(ratingSplit[1]);
-    
-        for(let i = 0; i < 5; i++) {
-            if(i < wholeStars) {
+
+        for (let i = 0; i < 5; i++) {
+            if (i < wholeStars) {
                 stars.push(0);
-            } else if(i === wholeStars && decimal >= 5) {
+            } else if (i === wholeStars && decimal >= 5) {
                 stars.push(1);
             } else {
                 stars.push(2);
-            } 
+            }
         }
-    
+
         stars = stars.map(num => {
-            if(num === 0) {
+            if (num === 0) {
                 return <div className="star"><i class="fas fa-star"></i></div>
-            } else if(num === 1) {
-               return <div className="star"><i class="fas fa-star-half-alt"></i></div> 
+            } else if (num === 1) {
+                return <div className="star"><i class="fas fa-star-half-alt"></i></div>
             } else {
                 return <div className="star"><i class="far fa-star"></i></div>
             }
@@ -64,37 +64,46 @@ const ActivityItem = (props) => {
             <p className="text-center">
                 <img src={props.activity.photoUrl} className="preview-image mb-10" />
             </p>
+            <div className="flex-container">
 
-            <p className="text-center">{props.activity.address}</p>
 
-            <div className="divider center mb-20 mt-20"></div>
+                <div className="left-container">
+                    <p className="text-center">{props.activity.address}</p>
 
-           <div className="open-container center">
-            {openDisplay}
-           </div>
-            
+                    <div className="divider center mb-20 mt-20"></div>
 
-            <div className="divider center mb-20 mt-20"></div>
+                    <div className="open-container center">
+                        {openDisplay}
+                    </div>
 
-            <div className="rating-container">
-                {stars}
+
+                    <div className="divider center mb-20 mt-20"></div>
+
+                    <div className="rating-container">
+                        {stars}
+                    </div>
+
+                    <div className="divider center mb-20 mt-20"></div>
+                </div>
+
+
+
+
+                <div className="right-container">
+                    <div className="map-container" >
+                        <GoogleMap
+                            mapContainerStyle={mapContainerStyle}
+                            zoom={13}
+                            center={center}
+                            options={options}
+                        >
+                            <Marker position={center} />
+
+                        </GoogleMap>
+                    </div>
+                </div>
+
             </div>
-
-            <div className="divider center mb-20 mt-20"></div>
-
-
-            <div className="map-container" >
-                <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    zoom={13}
-                    center={center}
-                    options={options}
-                >
-                    <Marker position={center} />
-
-                </GoogleMap>
-            </div>
-
 
         </div>
     )

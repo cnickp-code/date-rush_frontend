@@ -158,7 +158,7 @@ const LocationForm = () => {
     }
 
     if (forward) {
-        return <Redirect to='qb-activity'></Redirect>
+        return <Redirect to='quick-builder'></Redirect>
     }
 
     return (
@@ -196,7 +196,7 @@ const LocationForm = () => {
                                 setValue(e.target.value)
                             }}
                             disabled={!ready}
-                            placeholder='Enter an address'
+                            placeholder='Enter a city or address'
                             className='search'
                         />
                         <ComboboxPopover>

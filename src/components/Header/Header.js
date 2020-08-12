@@ -1,6 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import TokenService from '../../services/token-service';
 
 class Header extends React.Component {
+
+    handleLogoutClick = () => {
+        console.log('logged out')
+        TokenService.clearAuthToken();
+    }
     render() {
         return (
             <header>
@@ -15,6 +22,11 @@ class Header extends React.Component {
                 <div className="home-header-container">
                     <h1 className="landing-header1 center">Date</h1>
                     <h1 className="landing-header2 center">Rush</h1>
+                </div>
+                <div className="header-nav text-center">
+                    <NavLink to="/home" className="nav-btn"><i className="fas fa-home "></i></NavLink>
+                    <NavLink to="/profile" className="nav-btn"><i className="fas fa-user-circle"></i></NavLink>
+                    <NavLink to="/" className="nav-btn"><i className="fas fa-sign-out-alt nav-logout" onClick={this.handleLogoutClick}></i></NavLink>
                 </div>
             </header>
         );

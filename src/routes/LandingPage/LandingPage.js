@@ -71,8 +71,8 @@ class LandingPage extends React.Component {
                                 )}
 
                             </Spring>
-                            {this.state.login && <Login onLoginSuccess={this.handleLoginSuccess} toggleIntro={this.toggleIntro} intro={this.state.intro}/>}
-                            {!this.state.login && <Signup toggleIntro={this.toggleIntro}/>}
+                            {this.state.login && <Signup  toggleIntro={this.toggleIntro} intro={this.state.intro}/>}
+                            {!this.state.login && <Login toggleIntro={this.toggleIntro} onLoginSuccess={this.handleLoginSuccess}/>}
                         </>
                     )
                 }

@@ -111,9 +111,10 @@ class DrinksPage extends React.Component {
 
     handleAddDrink = () => {
         this.context.handleSetDateDrink(this.state.drink.idDrink);
-        this.setState({
-            forward: true
-        })
+        this.context.handleSetDateStep('Movie');
+        // this.setState({
+        //     forward: true
+        // })
     }
 
     componentDidMount() {
@@ -149,12 +150,14 @@ class DrinksPage extends React.Component {
         }
 
         return (
-            <main>
-                <Header />
-                <Nav />
+            <>
                 <section>
-                    <h2 className="text-center mb-10 mt-10">STEP 3 / What to Drink?</h2>
+                    <h2 className="page-header text-center mb-10 mt-10">STEP 3 / What to Drink?</h2>
 
+                    <div className="page-location-container center">
+                        <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
+                    </div>
+                    
                     {/* <CategorySelect onCategorySelect={this.handleSetCategory} categories={categoryArray}/> */}
 
                     {!this.state.loading && <div className="button-container">
@@ -179,7 +182,7 @@ class DrinksPage extends React.Component {
 
                     {/* <QuickBuildTracker /> */}
                 </section>
-            </main>
+            </>
         )
     }
 }

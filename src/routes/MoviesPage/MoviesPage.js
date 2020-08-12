@@ -97,11 +97,9 @@ class MoviesPage extends React.Component {
 
     }
 
-    handleForward = () => {
-        this.setState({
-            forward: true
-        })
-    }
+    // handleForward = () => {
+
+    // }
 
     // handleSetPopularity = (value) => {
     //     this.setState({
@@ -121,13 +119,15 @@ class MoviesPage extends React.Component {
             return <Redirect to='/profile'></Redirect>
         }
         return (
-            <main>
-                {this.context.nameOverlayShow && <SetNameOverlay handleForward={this.handleForward} />}
-                <Header />
-                <Nav />
-                <section>
-                    <h2 className="text-center mb-10 mt-10">STEP 4 / What to Watch?</h2>
+            <>
+                {/* {this.context.nameOverlayShow && <SetNameOverlay handleForward={this.props.handleForward} />} */}
 
+                <section>
+                    <h2 className="page-header text-center mb-10 mt-10">STEP 4 / What to Watch?</h2>
+
+                    <div className="page-location-container center">
+                        <p className="text-center"><i class="fas fa-map-marked-alt"></i> Current Location: {this.context.location}</p>
+                    </div>
                     <CategorySelect selectedCategory={this.state.selectedCategory} onCategorySelect={this.handleSetCategory} categories={categoryArray} />
 
                     {/* <div className="popularity-container center mt-20 mb-20">
@@ -157,7 +157,7 @@ class MoviesPage extends React.Component {
 
                     {/* <QuickBuildTracker /> */}
                 </section>
-            </main>
+            </>
         )
     }
 }

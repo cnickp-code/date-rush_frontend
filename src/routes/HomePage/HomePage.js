@@ -5,6 +5,7 @@ import LocationForm from '../../components/LocationForm/LocationForm';
 import LoadingOverlay from '../../components/LoadingOverlay/LoadingOverlay';
 import DRContext from '../../context/DRContext';
 import SetNameOverlay from '../../components/SetNameOverlay/SetNameOverlay';
+import { Spring } from 'react-spring/renderprops'
 
 class HomePage extends React.Component {
     static contextType = DRContext;
@@ -19,16 +20,16 @@ class HomePage extends React.Component {
                 {this.context.loading && <LoadingOverlay />}
                 {this.context.nameOverlayShow && <SetNameOverlay />}
                 <Header />
-                <Nav />
-                <section>
+                {/* <Nav /> */}
 
-                    <div className="home-top-wrapper">
+                <div className="home-top-wrapper">
                         <div className="home-container">
-                            <h2 className="text-center mb-10 mt-10">Welcome!</h2>
-                            <h3 className="text-center mb-10">Build a date in 4 easy steps!</h3>
+                            <h2 className="mb-10 mt-10">Welcome</h2>
+                            <h3 className="mb-10">Build a date in 4 easy steps!</h3>
                         </div>
-                    </div>
+                </div>
 
+                <section>
 
                     <div className="home-mid-wrapper">
                         <div class="step-card-container">
@@ -52,7 +53,7 @@ class HomePage extends React.Component {
                     </div>
 
 
-                    <div className="home-container">
+                    <div className="location-container">
                         <LocationForm />
                     </div>
 

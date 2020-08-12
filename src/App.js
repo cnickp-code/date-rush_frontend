@@ -23,7 +23,14 @@ class App extends React.Component {
       nameOverlayShow: false,
       myDates: [],
       summaryDate: null,
+      step: 'Activity',
     }
+  }
+
+  handleSetDateStep = (step) => {
+    this.setState({
+      step
+    })
   }
 
   handleReset = () => {
@@ -59,7 +66,8 @@ class App extends React.Component {
     let newDates = [...this.state.myDates, item]
 
     this.setState({
-      mydates: newDates
+      mydates: newDates,
+      step: 'Activity'
     })
   }
 
@@ -159,6 +167,7 @@ class App extends React.Component {
       nameOverlayShow: this.state.nameOverlayShow,
       myDates: this.state.myDates,
       summaryDate: this.state.summaryDate,
+      step: this.state.step,
 
       handleSetLocation: this.handleSetLocation,
       handleSetDateMeal: this.handleSetDateMeal,
@@ -173,7 +182,8 @@ class App extends React.Component {
       handleSetSummaryDate: this.handleSetSummaryDate,
       handleSetDates: this.handleSetDates,
       handleReset: this.handleReset,
-      handleDeleteItem: this.handleDeleteItem
+      handleDeleteItem: this.handleDeleteItem,
+      handleSetDateStep: this.handleSetDateStep
     }
 
     console.log('DATE OBJECTS: ')

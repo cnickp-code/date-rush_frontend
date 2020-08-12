@@ -42,101 +42,49 @@ class Login extends React.Component {
 
         return (
             <>
-                {
-                    this.props.intro ?
-                        (
-                            <Spring
-                                from={{ opacity: 0 }}
-                                to={{ opacity: 1 }}
-                                config={{ delay: 2000, duration: 1000 }}
-                            >
-                                {props => (
-                                    <div style={props} className="form-box-ls center">
-                                        <form className="main-form" onSubmit={this.handleSubmit}>
-                                            <div role='alert'>
-                                                {error && <p className='error'>{error}</p>}
-                                            </div>
-                                            <h1>Welcome Back</h1>
-
-                                            <fieldset name="login-info">
-                                                <h4 className="mb-10">Username</h4>
-                                                <input
-                                                    placeholder=""
-                                                    type="text"
-                                                    name="user_name"
-                                                    id="user_name"
-                                                    className="text-input center"
-                                                    required
-                                                />
-                                                <h4 className="mb-10">Password</h4>
-                                                <input
-                                                    type="password"
-                                                    name="password"
-                                                    id="password"
-                                                    placeholder=""
-                                                    className="text-input center"
-                                                    required
-                                                />
-                                            </fieldset>
-                                            <button type="submit" className="form-submit-button">Submit</button>
-                                        </form>
-                                        <div className="login-box center">
-                                            <p>
-                                                Don't have an account? {' '}
-                                <span className="landing-link" onClick={this.toggleLanding}>Sign up!</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                )}
-
-                            </Spring>
-                        )
-                        : (
-                            <Spring
-                                from={{ opacity: 0 }}
-                                to={{ opacity: 1 }}
-                            >
-                                {props => (
-                            <div style={props} className="form-box-ls center">
-                                <form className="main-form" onSubmit={this.handleSubmit}>
-                                    <div role='alert'>
-                                        {error && <p className='error'>{error}</p>}
-                                    </div>
-                                    <h1>Welcome Back</h1>
-
-                                    <fieldset name="login-info">
-                                        <h4 className="mb-10">Username</h4>
-                                        <input
-                                            placeholder=""
-                                            type="text"
-                                            name="user_name"
-                                            id="user_name"
-                                            className="text-input center"
-                                            required
-                                        />
-                                        <h4 className="mb-10">Password</h4>
-                                        <input
-                                            type="password"
-                                            name="password"
-                                            id="password"
-                                            placeholder=""
-                                            className="text-input center"
-                                            required
-                                        />
-                                    </fieldset>
-                                    <button type="submit" className="form-submit-button">Submit</button>
-                                </form>
-                                <div className="login-box center">
-                                    <p>
-                                        Don't have an account? {' '}
-                                        <span className="landing-link" onClick={this.toggleLanding}>Sign up!</span>
-                                    </p>
+                <Spring
+                    from={{ opacity: 0 }}
+                    to={{ opacity: 1 }}
+                >
+                    {props => (
+                        <div style={props} className="form-box-ls center">
+                            <form className="main-form" onSubmit={this.handleSubmit}>
+                                <div role='alert'>
+                                    {error && <p className='error'>{error}</p>}
                                 </div>
+                                <h1>Welcome Back</h1>
+
+                                <fieldset name="login-info">
+                                    <h4 className="mb-10">Username</h4>
+                                    <input
+                                        placeholder=""
+                                        type="text"
+                                        name="user_name"
+                                        id="user_name"
+                                        className="text-input center"
+                                        required
+                                    />
+                                    <h4 className="mb-10">Password</h4>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        placeholder=""
+                                        className="text-input center"
+                                        required
+                                    />
+                                </fieldset>
+                                <button type="submit" className="form-submit-button">Submit</button>
+                            </form>
+                            <div className="login-box center">
+                                <p>
+                                    Don't have an account? {' '}
+                                    <span className="landing-link" onClick={this.toggleLanding}>Sign up!</span>
+                                </p>
                             </div>
-                            )}
-                            </Spring>
-                        )
-                }
+                        </div>
+                    )}
+                </Spring>
             </>
 
         )
